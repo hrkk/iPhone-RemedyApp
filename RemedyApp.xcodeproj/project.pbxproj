@@ -1,0 +1,439 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A7CF22571B150009007EF1E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22561B150009007EF1E7 /* main.m */; };
+		A7CF225A1B150009007EF1E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22591B150009007EF1E7 /* AppDelegate.m */; };
+		A7CF225D1B150009007EF1E7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF225C1B150009007EF1E7 /* ViewController.m */; };
+		A7CF22601B150009007EF1E7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A7CF225E1B150009007EF1E7 /* Main.storyboard */; };
+		A7CF22621B150009007EF1E7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A7CF22611B150009007EF1E7 /* Images.xcassets */; };
+		A7CF22651B150009007EF1E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CF22631B150009007EF1E7 /* LaunchScreen.xib */; };
+		A7CF22711B150009007EF1E7 /* RemedyAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22701B150009007EF1E7 /* RemedyAppTests.m */; };
+		A7CF227B1B150396007EF1E7 /* creme_brelee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A7CF227A1B150396007EF1E7 /* creme_brelee.jpg */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		A7CF226B1B150009007EF1E7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = A7CF22491B150009007EF1E7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A7CF22501B150009007EF1E7;
+			remoteInfo = RemedyApp;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		A7CF22511B150009007EF1E7 /* RemedyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemedyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7CF22551B150009007EF1E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7CF22561B150009007EF1E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A7CF22581B150009007EF1E7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		A7CF22591B150009007EF1E7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		A7CF225B1B150009007EF1E7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		A7CF225C1B150009007EF1E7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		A7CF225F1B150009007EF1E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		A7CF22611B150009007EF1E7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		A7CF22641B150009007EF1E7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		A7CF226A1B150009007EF1E7 /* RemedyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RemedyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		A7CF226F1B150009007EF1E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A7CF22701B150009007EF1E7 /* RemedyAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemedyAppTests.m; sourceTree = "<group>"; };
+		A7CF227A1B150396007EF1E7 /* creme_brelee.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = creme_brelee.jpg; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A7CF224E1B150009007EF1E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7CF22671B150009007EF1E7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A7CF22481B150009007EF1E7 = {
+			isa = PBXGroup;
+			children = (
+				A7CF22531B150009007EF1E7 /* RemedyApp */,
+				A7CF226D1B150009007EF1E7 /* RemedyAppTests */,
+				A7CF22521B150009007EF1E7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A7CF22521B150009007EF1E7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A7CF22511B150009007EF1E7 /* RemedyApp.app */,
+				A7CF226A1B150009007EF1E7 /* RemedyAppTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A7CF22531B150009007EF1E7 /* RemedyApp */ = {
+			isa = PBXGroup;
+			children = (
+				A7CF227A1B150396007EF1E7 /* creme_brelee.jpg */,
+				A7CF22581B150009007EF1E7 /* AppDelegate.h */,
+				A7CF22591B150009007EF1E7 /* AppDelegate.m */,
+				A7CF225B1B150009007EF1E7 /* ViewController.h */,
+				A7CF225C1B150009007EF1E7 /* ViewController.m */,
+				A7CF225E1B150009007EF1E7 /* Main.storyboard */,
+				A7CF22611B150009007EF1E7 /* Images.xcassets */,
+				A7CF22631B150009007EF1E7 /* LaunchScreen.xib */,
+				A7CF22541B150009007EF1E7 /* Supporting Files */,
+			);
+			path = RemedyApp;
+			sourceTree = "<group>";
+		};
+		A7CF22541B150009007EF1E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7CF22551B150009007EF1E7 /* Info.plist */,
+				A7CF22561B150009007EF1E7 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A7CF226D1B150009007EF1E7 /* RemedyAppTests */ = {
+			isa = PBXGroup;
+			children = (
+				A7CF22701B150009007EF1E7 /* RemedyAppTests.m */,
+				A7CF226E1B150009007EF1E7 /* Supporting Files */,
+			);
+			path = RemedyAppTests;
+			sourceTree = "<group>";
+		};
+		A7CF226E1B150009007EF1E7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7CF226F1B150009007EF1E7 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A7CF22501B150009007EF1E7 /* RemedyApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7CF22741B150009007EF1E7 /* Build configuration list for PBXNativeTarget "RemedyApp" */;
+			buildPhases = (
+				A7CF224D1B150009007EF1E7 /* Sources */,
+				A7CF224E1B150009007EF1E7 /* Frameworks */,
+				A7CF224F1B150009007EF1E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RemedyApp;
+			productName = RemedyApp;
+			productReference = A7CF22511B150009007EF1E7 /* RemedyApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+		A7CF22691B150009007EF1E7 /* RemedyAppTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A7CF22771B150009007EF1E7 /* Build configuration list for PBXNativeTarget "RemedyAppTests" */;
+			buildPhases = (
+				A7CF22661B150009007EF1E7 /* Sources */,
+				A7CF22671B150009007EF1E7 /* Frameworks */,
+				A7CF22681B150009007EF1E7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				A7CF226C1B150009007EF1E7 /* PBXTargetDependency */,
+			);
+			name = RemedyAppTests;
+			productName = RemedyAppTests;
+			productReference = A7CF226A1B150009007EF1E7 /* RemedyAppTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A7CF22491B150009007EF1E7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Kasper Odgaard";
+				TargetAttributes = {
+					A7CF22501B150009007EF1E7 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					A7CF22691B150009007EF1E7 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = A7CF22501B150009007EF1E7;
+					};
+				};
+			};
+			buildConfigurationList = A7CF224C1B150009007EF1E7 /* Build configuration list for PBXProject "RemedyApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A7CF22481B150009007EF1E7;
+			productRefGroup = A7CF22521B150009007EF1E7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A7CF22501B150009007EF1E7 /* RemedyApp */,
+				A7CF22691B150009007EF1E7 /* RemedyAppTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A7CF224F1B150009007EF1E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7CF22601B150009007EF1E7 /* Main.storyboard in Resources */,
+				A7CF227B1B150396007EF1E7 /* creme_brelee.jpg in Resources */,
+				A7CF22651B150009007EF1E7 /* LaunchScreen.xib in Resources */,
+				A7CF22621B150009007EF1E7 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7CF22681B150009007EF1E7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A7CF224D1B150009007EF1E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7CF225D1B150009007EF1E7 /* ViewController.m in Sources */,
+				A7CF225A1B150009007EF1E7 /* AppDelegate.m in Sources */,
+				A7CF22571B150009007EF1E7 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A7CF22661B150009007EF1E7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A7CF22711B150009007EF1E7 /* RemedyAppTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		A7CF226C1B150009007EF1E7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A7CF22501B150009007EF1E7 /* RemedyApp */;
+			targetProxy = A7CF226B1B150009007EF1E7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		A7CF225E1B150009007EF1E7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7CF225F1B150009007EF1E7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		A7CF22631B150009007EF1E7 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A7CF22641B150009007EF1E7 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A7CF22721B150009007EF1E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A7CF22731B150009007EF1E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A7CF22751B150009007EF1E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RemedyApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		A7CF22761B150009007EF1E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = RemedyApp/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		A7CF22781B150009007EF1E7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RemedyAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RemedyApp.app/RemedyApp";
+			};
+			name = Debug;
+		};
+		A7CF22791B150009007EF1E7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = RemedyAppTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RemedyApp.app/RemedyApp";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A7CF224C1B150009007EF1E7 /* Build configuration list for PBXProject "RemedyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7CF22721B150009007EF1E7 /* Debug */,
+				A7CF22731B150009007EF1E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7CF22741B150009007EF1E7 /* Build configuration list for PBXNativeTarget "RemedyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7CF22751B150009007EF1E7 /* Debug */,
+				A7CF22761B150009007EF1E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A7CF22771B150009007EF1E7 /* Build configuration list for PBXNativeTarget "RemedyAppTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7CF22781B150009007EF1E7 /* Debug */,
+				A7CF22791B150009007EF1E7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A7CF22491B150009007EF1E7 /* Project object */;
+}
