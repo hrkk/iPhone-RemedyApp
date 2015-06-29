@@ -10,5 +10,6 @@
 
 @interface ComposeViewController : UIViewController <UITextViewDelegate>
 @property (nonatomic, strong) NSString *description;
+@property (nonatomic, strong) NSString *orginalDescription;
 
 @end

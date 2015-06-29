@@ -13,6 +13,7 @@
 @interface ComposeViewController ()
 @property (weak, nonatomic) IBOutlet UITextView *messageTextView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *cancelButton;
 
 
 @end
@@ -20,11 +21,13 @@
 @implementation ComposeViewController
 
 @synthesize description;
+@synthesize orginalDescription;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
      NSLog(@"viewDidLoad %@", description);
+    orginalDescription = description;
     // angiver title i navigationBar
 //    self.navigationItem.title=  @"Your Title";
     [self updateBytesRemaining:description];
@@ -55,6 +58,7 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if (sender != self.saveButton) return;
     RemedyTableViewController *dest = segue.destinationViewController;
  //   RemedyTableViewController *dest = (RemedyTableViewController * )navigationController.topViewController;
     NSLog(@"dest %@", _messageTextView.text);

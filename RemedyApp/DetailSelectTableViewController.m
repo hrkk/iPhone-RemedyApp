@@ -24,7 +24,7 @@
    [super viewDidLoad];
     
    NSLog(@"problemType: %@", problemType);
-   self.navigationItem.title = NSLocalizedString(@"Area", nil);
+   self.navigationItem.title = NSLocalizedString(problemType, nil);
    if ([problemType isEqualToString:@"AREA"]) {
        detailList = [NSArray arrayWithObjects:@"Area 1", @"Area 2", @"Area 3",nil];
    } else if ([problemType isEqualToString:@"MACHINE"]) {

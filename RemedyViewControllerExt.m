@@ -9,6 +9,8 @@
 #import "RemedyViewControllerExt.h"
 #import "DetailSelectTableViewController.h"
 #import "ComposeViewController.h"
+#import "LogItem.h"
+#import "ContactInfoViewController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f // bredden af description
@@ -19,6 +21,8 @@
     NSArray *problems;
     NSArray *contactInfos;
     NSArray *logs;
+    
+    NSMutableArray *logArray;
 }
 
 @end
@@ -48,9 +52,12 @@
      NSLog(@"unwindRemedyDescription metode in RemedyViewControllerExt");
      ComposeViewController *source = [segue sourceViewController];
      NSLog(@"unwindRemedyDescription source.description %@ remedyItem.description %@ in RemedyViewControllerExt", source.description,remedyItem.description);
-    remedyItem.description =source.description;
-    
-    [self.tableView reloadData];
+    if (source.description != nil) {
+        remedyItem.description =source.description;
+        if ([remedyItem.description isEqualToString:@""])
+             remedyItem.description = @"No description";
+        [self.tableView reloadData];
+    }
 }
 
 - (void)viewDidLoad {
@@ -62,13 +69,34 @@
     problems = [NSArray arrayWithObjects:@"Area", @"Machine", @"Type of error", nil];
     contactInfos = [NSArray arrayWithObjects:@"Name", @"Email", @"Phone number", nil];
     logs = [NSArray arrayWithObjects:@"Created", @"Assign to XXX", @"Reassignment", nil];
+    
+    
+    
+    
+    
+   logArray = [[NSMutableArray alloc] init];
+    // add some data to the array
+    LogItem *logItem1 = [[LogItem alloc] init];
+    logItem1.username = @"Kasper O";
+    logItem1.status = @"Created";
+    logItem1.displayDateTime =@"5h";
+    
+    [logArray addObject:logItem1];
+    
+    LogItem *logItem2 = [[LogItem alloc] init];
+    logItem2.username = @"Jørgen Jørgsen";
+    logItem2.status = @"Assigned";
+    logItem2.displayDateTime =@"1d";
+    
+     [logArray addObject:logItem2];
+    
     // Navigation Title
     self.navigationItem.title=  @"Create";
     
     // create empty remedyItem
     if(remedyItem==nil) {
         remedyItem = [[RemedyItem alloc] init];
-        remedyItem.description = @"";
+        remedyItem.description = @"No description";
     }
 }
 
@@ -86,9 +114,8 @@
     } else  if(section == 2){
          return 1;
     } else if(section == 3) {
-         return [contactInfos count];
+        return [logArray count];
     } else if(section == 4) {
-        return [logs count];
     }
   
     return 2;
@@ -98,7 +125,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    return 4;
     
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:   (NSInteger)section
@@ -110,7 +137,7 @@
     } else if(section == 2) {
         return @"Picture";
     } else if(section == 3) {
-        return @"Contact information";
+        return @"Log";
     } else {
         return @"Log";
     }
@@ -142,8 +169,7 @@
     static NSString *customCellTableIdentifier = @"CustomCell";
     static NSString *customImageCellTableIdentifier = @"CustomImageCell";
     static NSString *remedyDescriptionCellTableIdentifier = @"RemedyDescriptionCell";
-    
-    
+    static NSString *logCellTableIdentifier = @"LogCell";
     
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     
@@ -170,6 +196,12 @@
         descriptionCell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
       // descriptionCell.textLabel.text = @"jdnjc dcbcdh cdc dhc dc dc dc djnc djnc dnc dc c sc nsjddd ks kasper Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Kasper Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat K nulla jncdjscndjdcndjscn dcndjcndjsc sdc dsnc dnc d cd cdn cjdkjdncjdfnvdfjv sidste";
         descriptionCell.textLabel.text =  remedyItem.description;
+        if ([descriptionCell.textLabel.text isEqualToString:@"No description"]) {
+            descriptionCell.textLabel.font = [UIFont italicSystemFontOfSize:16.0];
+        } else {
+            descriptionCell.textLabel.font = [UIFont systemFontOfSize:16.0];
+        }
+        
         cell = descriptionCell;
     } else if(indexPath.section == 2) {
          UITableViewCell *customerCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -187,39 +219,20 @@
         cell.imageView.image = [UIImage imageNamed:@"glad.jpg"];
         cell.textLabel.text = @"Click for large pic";
         cell.detailTextLabel.text = @"";
-    } else if(indexPath.section == 3) { // Contact
-       UITableViewCell *customerCell = [tableView dequeueReusableCellWithIdentifier:customCellTableIdentifier];
-    //    cell.textLabel.text = [contactInfos objectAtIndex:indexPath.row];
-    //    cell.detailTextLabel.text = [contactInfos objectAtIndex:indexPath.row];
-        cell = customerCell;
-        UILabel *recipeNameLabel = (UILabel *)[cell viewWithTag:100];
-        recipeNameLabel.text = [contactInfos objectAtIndex:indexPath.row];
-    } else if(indexPath.section == 4) {
-       cell.textLabel.text = [logs objectAtIndex:indexPath.row];
+    }  else if(indexPath.section == 3) {
+        UITableViewCell *logCell = [tableView dequeueReusableCellWithIdentifier:logCellTableIdentifier];
+        LogItem *logItem = [logArray objectAtIndex:indexPath.row];
+        logCell.textLabel.text = logItem.username;
+        NSString *detailTextLabel = [NSString stringWithFormat:@"%@ - %@", logItem.status,
+                               logItem.displayDateTime];
+        logCell.detailTextLabel.text = detailTextLabel;
+        cell = logCell;
     } else if(indexPath.section == 5) {
         
     }
     return cell;
 }
 
-// styrer hvilker view man skal føres hentil
-// når der er mere en 2 forskellige view man kan føres hent til ved klik i en tableViewCell
-// så kan ctrl-drag med seque fra cell ikke anvendes. Seque skal laves på øverste view niveau og
-// så routes man videre i denne metode.
-// http://www.sundoginteractive.com/sunblog/posts/performing-segues-in-ios-programmatically
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *segueName = nil;
-    
-     if(indexPath.section ==0) {
-           segueName = @"showRemedySelect";
-     } else  if(indexPath.section ==1) {
-          segueName = @"showRemedyDecription";
-     }
-    
-    [self performSegueWithIdentifier: segueName sender: self];
-}
  
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -245,6 +258,30 @@
 
 
 
+// styrer hvilker view man skal føres hentil
+// når der er mere en 2 forskellige view man kan føres hent til ved klik i en tableViewCell
+// så kan ctrl-drag med seque fra cell ikke anvendes. Seque skal laves på øverste view niveau og
+// så routes man videre i denne metode.
+// http://www.sundoginteractive.com/sunblog/posts/performing-segues-in-ios-programmatically
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *segueName = nil;
+    
+    if(indexPath.section ==0) {
+        segueName = @"showRemedySelect";
+    } else  if(indexPath.section == 1) {
+        segueName = @"showRemedyDecription";
+    } else  if(indexPath.section == 2) {
+        segueName = @"showTODO";
+    }else  if(indexPath.section == 3) {
+        segueName = @"showContactInfo";
+    }
+    
+    [self performSegueWithIdentifier: segueName sender: self];
+}
+
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -266,13 +303,23 @@
             dest.problemType = @"ERROR_TYPE";
         dest.remedyItem = remedyItem;
     }
-    if ([segue.identifier isEqualToString:@"showRemedyDecription"]) {
+    else if ([segue.identifier isEqualToString:@"showRemedyDecription"]) {
         NSLog(@"prepareForSegue indexPath: %@s", segue.identifier);
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         NSLog(@"prepareForSegue indexPath: %@ %ld", segue.identifier, (long)indexPath.row);
         UINavigationController *navigationController = segue.destinationViewController;
         ComposeViewController *dest = (ComposeViewController * )navigationController;
-        dest.description = remedyItem.description;
+        if ([remedyItem.description isEqualToString:@"No description"])
+            dest.description = @"";
+        else
+            dest.description = remedyItem.description;
+    }
+    else if ([segue.identifier isEqualToString:@"showContactInfo"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        ContactInfoViewController *dest = (ContactInfoViewController * )navigationController;
+        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        LogItem *logItem = [logArray objectAtIndex:indexPath.row];
+        dest.userId =logItem.userId;
     }
 }
 
