@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A73C52A51B27761E004A27E6 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52A41B27761E004A27E6 /* ComposeViewController.m */; };
+		A73C52AB1B28329F004A27E6 /* RemedyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52AA1B28329F004A27E6 /* RemedyTableViewController.m */; };
+		A73C52AE1B28D5A0004A27E6 /* RemedyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52AD1B28D5A0004A27E6 /* RemedyItem.m */; };
+		A73C52B11B2F0051004A27E6 /* DetailSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52B01B2F0051004A27E6 /* DetailSelectTableViewController.m */; };
+		A73C52B41B30BF44004A27E6 /* RemedyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52B31B30BF44004A27E6 /* RemedyViewController.m */; };
+		A73C52B61B3302BA004A27E6 /* glad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A73C52B51B3302BA004A27E6 /* glad.jpg */; };
+		A73C52B81B3304B4004A27E6 /* 20150605_122742.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A73C52B71B3304B4004A27E6 /* 20150605_122742.jpg */; };
+		A771E83B1B36B5720018E94C /* RemedyViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E83A1B36B5720018E94C /* RemedyViewControllerExt.m */; };
+		A771E83E1B37E03A0018E94C /* CustomImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E83D1B37E03A0018E94C /* CustomImageCell.m */; };
 		A7CF22571B150009007EF1E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22561B150009007EF1E7 /* main.m */; };
 		A7CF225A1B150009007EF1E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22591B150009007EF1E7 /* AppDelegate.m */; };
 		A7CF225D1B150009007EF1E7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF225C1B150009007EF1E7 /* ViewController.m */; };
@@ -28,6 +37,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A73C52A31B27761E004A27E6 /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
+		A73C52A41B27761E004A27E6 /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		A73C52A91B28329F004A27E6 /* RemedyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyTableViewController.h; sourceTree = "<group>"; };
+		A73C52AA1B28329F004A27E6 /* RemedyTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyTableViewController.m; sourceTree = "<group>"; };
+		A73C52AC1B28D59F004A27E6 /* RemedyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyItem.h; sourceTree = "<group>"; };
+		A73C52AD1B28D5A0004A27E6 /* RemedyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyItem.m; sourceTree = "<group>"; };
+		A73C52AF1B2F0051004A27E6 /* DetailSelectTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailSelectTableViewController.h; sourceTree = "<group>"; };
+		A73C52B01B2F0051004A27E6 /* DetailSelectTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailSelectTableViewController.m; sourceTree = "<group>"; };
+		A73C52B21B30BF44004A27E6 /* RemedyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyViewController.h; sourceTree = "<group>"; };
+		A73C52B31B30BF44004A27E6 /* RemedyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyViewController.m; sourceTree = "<group>"; };
+		A73C52B51B3302BA004A27E6 /* glad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = glad.jpg; sourceTree = "<group>"; };
+		A73C52B71B3304B4004A27E6 /* 20150605_122742.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 20150605_122742.jpg; sourceTree = "<group>"; };
+		A771E8391B36B5720018E94C /* RemedyViewControllerExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemedyViewControllerExt.h; path = ../RemedyViewControllerExt.h; sourceTree = "<group>"; };
+		A771E83A1B36B5720018E94C /* RemedyViewControllerExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemedyViewControllerExt.m; path = ../RemedyViewControllerExt.m; sourceTree = "<group>"; };
+		A771E83C1B37E03A0018E94C /* CustomImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageCell.h; sourceTree = "<group>"; };
+		A771E83D1B37E03A0018E94C /* CustomImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomImageCell.m; sourceTree = "<group>"; };
 		A7CF22511B150009007EF1E7 /* RemedyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemedyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7CF22551B150009007EF1E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7CF22561B150009007EF1E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -83,15 +108,31 @@
 		A7CF22531B150009007EF1E7 /* RemedyApp */ = {
 			isa = PBXGroup;
 			children = (
+				A771E8391B36B5720018E94C /* RemedyViewControllerExt.h */,
+				A771E83A1B36B5720018E94C /* RemedyViewControllerExt.m */,
+				A73C52B71B3304B4004A27E6 /* 20150605_122742.jpg */,
+				A73C52B51B3302BA004A27E6 /* glad.jpg */,
 				A7CF227A1B150396007EF1E7 /* creme_brelee.jpg */,
 				A7CF22581B150009007EF1E7 /* AppDelegate.h */,
 				A7CF22591B150009007EF1E7 /* AppDelegate.m */,
 				A7CF225B1B150009007EF1E7 /* ViewController.h */,
 				A7CF225C1B150009007EF1E7 /* ViewController.m */,
 				A7CF225E1B150009007EF1E7 /* Main.storyboard */,
+				A73C52B21B30BF44004A27E6 /* RemedyViewController.h */,
+				A73C52B31B30BF44004A27E6 /* RemedyViewController.m */,
 				A7CF22611B150009007EF1E7 /* Images.xcassets */,
 				A7CF22631B150009007EF1E7 /* LaunchScreen.xib */,
 				A7CF22541B150009007EF1E7 /* Supporting Files */,
+				A73C52A31B27761E004A27E6 /* ComposeViewController.h */,
+				A73C52A41B27761E004A27E6 /* ComposeViewController.m */,
+				A73C52AC1B28D59F004A27E6 /* RemedyItem.h */,
+				A73C52AD1B28D5A0004A27E6 /* RemedyItem.m */,
+				A73C52A91B28329F004A27E6 /* RemedyTableViewController.h */,
+				A73C52AA1B28329F004A27E6 /* RemedyTableViewController.m */,
+				A73C52AF1B2F0051004A27E6 /* DetailSelectTableViewController.h */,
+				A73C52B01B2F0051004A27E6 /* DetailSelectTableViewController.m */,
+				A771E83C1B37E03A0018E94C /* CustomImageCell.h */,
+				A771E83D1B37E03A0018E94C /* CustomImageCell.m */,
 			);
 			path = RemedyApp;
 			sourceTree = "<group>";
@@ -205,6 +246,8 @@
 				A7CF22601B150009007EF1E7 /* Main.storyboard in Resources */,
 				A7CF227B1B150396007EF1E7 /* creme_brelee.jpg in Resources */,
 				A7CF22651B150009007EF1E7 /* LaunchScreen.xib in Resources */,
+				A73C52B61B3302BA004A27E6 /* glad.jpg in Resources */,
+				A73C52B81B3304B4004A27E6 /* 20150605_122742.jpg in Resources */,
 				A7CF22621B150009007EF1E7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,7 +268,14 @@
 			files = (
 				A7CF225D1B150009007EF1E7 /* ViewController.m in Sources */,
 				A7CF225A1B150009007EF1E7 /* AppDelegate.m in Sources */,
+				A73C52AE1B28D5A0004A27E6 /* RemedyItem.m in Sources */,
+				A73C52AB1B28329F004A27E6 /* RemedyTableViewController.m in Sources */,
+				A771E83E1B37E03A0018E94C /* CustomImageCell.m in Sources */,
 				A7CF22571B150009007EF1E7 /* main.m in Sources */,
+				A771E83B1B36B5720018E94C /* RemedyViewControllerExt.m in Sources */,
+				A73C52A51B27761E004A27E6 /* ComposeViewController.m in Sources */,
+				A73C52B41B30BF44004A27E6 /* RemedyViewController.m in Sources */,
+				A73C52B11B2F0051004A27E6 /* DetailSelectTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
