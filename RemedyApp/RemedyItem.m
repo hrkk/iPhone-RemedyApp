@@ -14,5 +14,6 @@
 @synthesize areaID;
 @synthesize machineID;
 @synthesize errorTypeID;
+@synthesize image;
 
 @end

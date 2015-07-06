@@ -381,16 +381,25 @@
                                                             </subviews>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
-                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="CustomImageCell" rowHeight="188" id="dMs-LQ-cTT" userLabel="Custom Image View Cell">
+                                                    <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="CustomImageCell" rowHeight="188" id="dMs-LQ-cTT" userLabel="Custom Image View Cell">
                                                         <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" tableViewCell="dMs-LQ-cTT" id="ufa-fr-dgz">
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Ex-3m-YEM">
-                                                                    <rect key="frame" x="16" y="8" width="302" height="174"/>
+                                                                <imageView userInteractionEnabled="NO" tag="1000" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Ex-3m-YEM">
+                                                                    <rect key="frame" x="149" y="5" width="302" height="174"/>
                                                                 </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="No photo" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bOE-3E-pTA">
+                                                                    <rect key="frame" x="17" y="8" width="83" height="21"/>
+                                                                    <fontDescription key="fontDescription" type="italicSystem" pointSize="17"/>
+                                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="centerX" secondItem="5Ex-3m-YEM" secondAttribute="centerX" id="mCn-EC-6vr"/>
+                                                            </constraints>
                                                         </tableViewCellContentView>
                                                     </tableViewCell>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="LogCell" textLabel="N9L-z1-XcH" detailTextLabel="8qP-JS-tlv" style="IBUITableViewCellStyleSubtitle" id="OdL-Eb-wBa">
@@ -451,11 +460,73 @@
                         <segue destination="6bY-WL-d2a" kind="show" identifier="showRemedyDecription" id="sd5-NO-pMi"/>
                         <segue destination="Sr7-dA-3Uq" kind="show" identifier="showRemedySelect" id="cD7-L9-zh7"/>
                         <segue destination="FSX-R5-NhR" kind="show" identifier="showContactInfo" id="Tdh-d1-eF3"/>
+                        <segue destination="0hq-NV-wyZ" kind="show" identifier="showImage" id="ECl-dG-Lbb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6tn-Ik-7MP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3730" y="1077"/>
+        </scene>
+        <!--Title-->
+        <scene sceneID="jbE-PH-IqE">
+            <objects>
+                <viewController id="0hq-NV-wyZ" customClass="CameraViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gVo-eu-0Od"/>
+                        <viewControllerLayoutGuide type="bottom" id="5xv-TD-aUi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gJ7-m2-9Jt">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleAspectFit" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4AA-Bj-5tR">
+                                <rect key="frame" x="0.0" y="556" width="606" height="44"/>
+                                <items>
+                                    <barButtonItem title="Take Photo" id="Qeu-mc-1dh">
+                                        <connections>
+                                            <action selector="useCamera:" destination="0hq-NV-wyZ" id="IIC-1p-33d"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem title="Select Photo" id="zFk-YR-2uu">
+                                        <connections>
+                                            <action selector="useCameraRoll:" destination="0hq-NV-wyZ" id="vni-jQ-SbM"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                            </toolbar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="100" translatesAutoresizingMaskIntoConstraints="NO" id="pnv-P7-FKa">
+                                <rect key="frame" x="16" y="64" width="568" height="475"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5xv-TD-aUi" firstAttribute="top" secondItem="pnv-P7-FKa" secondAttribute="bottom" constant="61" id="5eb-Ia-zd1"/>
+                            <constraint firstItem="5xv-TD-aUi" firstAttribute="top" secondItem="4AA-Bj-5tR" secondAttribute="bottom" id="ExI-hB-UDO"/>
+                            <constraint firstItem="4AA-Bj-5tR" firstAttribute="leading" secondItem="gJ7-m2-9Jt" secondAttribute="leadingMargin" constant="-16" id="G9y-0k-SDO"/>
+                            <constraint firstItem="pnv-P7-FKa" firstAttribute="top" secondItem="gVo-eu-0Od" secondAttribute="bottom" id="HvU-Nt-TG6"/>
+                            <constraint firstItem="4AA-Bj-5tR" firstAttribute="top" secondItem="pnv-P7-FKa" secondAttribute="bottom" constant="12" id="IFc-Ub-Nsh"/>
+                            <constraint firstItem="pnv-P7-FKa" firstAttribute="leading" secondItem="gJ7-m2-9Jt" secondAttribute="leadingMargin" id="Jy1-cK-E1k"/>
+                            <constraint firstItem="5xv-TD-aUi" firstAttribute="top" secondItem="4AA-Bj-5tR" secondAttribute="bottom" id="M6I-Cc-WqG"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4AA-Bj-5tR" secondAttribute="trailing" constant="-22" id="T4q-NJ-SrB"/>
+                            <constraint firstItem="pnv-P7-FKa" firstAttribute="trailing" secondItem="gJ7-m2-9Jt" secondAttribute="trailingMargin" id="kHV-0v-OX0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="pMm-cl-Az5">
+                        <barButtonItem key="backBarButtonItem" title="Cancel" id="eRo-nA-trg"/>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="pSM-We-sKO" userLabel="Done">
+                            <connections>
+                                <segue destination="6PD-Ag-FBk" kind="unwind" unwindAction="unwindRemedyPhoto:" id="ZPS-BM-opl"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="imageView" destination="pnv-P7-FKa" id="Wpc-vJ-dyr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gzy-f0-j7r" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="6PD-Ag-FBk" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="4455" y="1077"/>
         </scene>
         <!--Contact Info View Controller-->
         <scene sceneID="XYB-Fh-yy7">
@@ -509,7 +580,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tOT-k4-uaw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4515" y="1214"/>
+            <point key="canvasLocation" x="4495" y="2090"/>
         </scene>
         <!--Remedy Decription-->
         <scene sceneID="g1W-lo-944">
@@ -556,7 +627,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jzD-xG-EXz" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="vZC-Pv-nE2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4515" y="473"/>
+            <point key="canvasLocation" x="4509" y="245"/>
         </scene>
         <!--Detail Select Table View Controller-->
         <scene sceneID="VdL-jG-CL9">
@@ -598,7 +669,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JNh-PZ-R3r" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="T4U-KH-aJ4" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4515" y="-245"/>
+            <point key="canvasLocation" x="4509" y="-441"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LfY-KA-eWp">

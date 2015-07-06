@@ -11,6 +11,7 @@
 #import "ComposeViewController.h"
 #import "LogItem.h"
 #import "ContactInfoViewController.h"
+#import "CameraViewController.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f // bredden af description
@@ -58,6 +59,29 @@
              remedyItem.description = @"No description";
         [self.tableView reloadData];
     }
+}
+
+- (IBAction)unwindRemedyPhoto:(UIStoryboardSegue *)segue {
+    NSLog(@"unwindRemedyPhoto metode in RemedyViewControllerExt");
+    CameraViewController *source = [segue sourceViewController];
+     if (source.description != nil) {
+        remedyItem.image = source.selectImage;
+        [self.tableView reloadData];
+     }
+    
+      // item = source.toDoItem;
+    // NSLog(@"  value=%@",item);
+    // if (item != nil) {
+    // change index 0
+    //   recipes[0] = item;
+    //    [self.tableView reloadData];
+    // }
+}
+
+
+- (void)viewWillAppear: (BOOL) animated {
+    NSLog(@"viewWillAppear metode in RemedyViewControllerExt");
+    [self.tableView reloadData];
 }
 
 - (void)viewDidLoad {
@@ -204,21 +228,75 @@
         
         cell = descriptionCell;
     } else if(indexPath.section == 2) {
-         UITableViewCell *customerCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        /*
+        UITableViewCell *customerCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        
+       
+        UIImageView *pic = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"glad.jpg"]];
+        pic.center = CGPointMake(cell.contentView.bounds.size.width / 2 , 60);
+        pic.contentMode = UIViewContentModeScaleAspectFit;
+        customerCell.selectionStyle = UITableViewCellSelectionStyleGray;
+        [customerCell.contentView addSubview:pic];
+        
+        return customerCell;
+        */
+        
      //
-      //  UIImageView *problemPicImageView = (UIImageView *)[customerCell viewWithTag:1000];
-      //  problemPicImageView.image = [UIImage imageNamed:@"glad.jpg"];
+        UITableViewCell *customerCell = [tableView dequeueReusableCellWithIdentifier:customImageCellTableIdentifier];
+       UIImageView *problemPicImageView = (UIImageView *)[customerCell viewWithTag:1000];
+       UILabel *problemPicLabel = (UILabel *)[customerCell viewWithTag:1001];
+        
+        if(remedyItem.image ==nil){
+         problemPicLabel.hidden = NO;
+        } else {
+            problemPicLabel.hidden = YES;
+        }
+
+        
+        UIImage *orgImg =  remedyItem.image; // [UIImage imageNamed:@"glad.jpg"];
+        // resize 1
+        /*
+        CGRect rect = CGRectMake(0,0,175,175);
+        UIGraphicsBeginImageContext( rect.size );
+        [orgImg drawInRect:rect];
+        UIImage *picture1 = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        
+        NSData *imageData = UIImagePNGRepresentation(picture1);
+        UIImage *img=[UIImage imageWithData:imageData];
+        */
+        // resize 2
+        
+        /*
+        CGRect rect = CGRectMake(0,0,175,175);
+        CGSize newSize =rect.size;
+        CGFloat scale = [[UIScreen mainScreen]scale];
+        //You can remove the below comment if you dont want to scale the image in retina   device .Dont // forget to comment UIGraphicsBeginImageContextWithOptions
+        //UIGraphicsBeginImageContext(newSize);
+        UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+        [orgImg drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+        UIGraphicsEndImageContext();
+        */
+        
+        // resize 3
+        
+        UIImage *myResizedImage = [self imageWithImage:orgImg
+                                                scaledToMaxWidth:175
+                                                       maxHeight:175];
+        problemPicImageView.image =myResizedImage;
         
         // sørger for at hele billede kan ses
        //   problemPicImageView.contentMode = UIViewContentModeCenter;
         
        //  problemPicImageView.contentMode = UIViewContentModeScaleAspectFit;
 
-         cell = customerCell;
+        cell = customerCell;
        // cell.textLabel.text = @"Show large picture";
-        cell.imageView.image = [UIImage imageNamed:@"glad.jpg"];
-        cell.textLabel.text = @"Click for large pic";
-        cell.detailTextLabel.text = @"";
+   // 2    cell.imageView.image = [UIImage imageNamed:@"glad.jpg"];
+   // 3     cell.textLabel.text = @"Click for large pic";
+   // 4     cell.detailTextLabel.text = @"";
+        return cell;
     }  else if(indexPath.section == 3) {
         UITableViewCell *logCell = [tableView dequeueReusableCellWithIdentifier:logCellTableIdentifier];
         LogItem *logItem = [logArray objectAtIndex:indexPath.row];
@@ -233,6 +311,32 @@
     return cell;
 }
 
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)size {
+    if ([[UIScreen mainScreen] respondsToSelector:@selector(scale)]) {
+        UIGraphicsBeginImageContextWithOptions(size, NO, [[UIScreen mainScreen] scale]);
+    } else {
+        UIGraphicsBeginImageContext(size);
+    }
+    [image drawInRect:CGRectMake(0, 0, size.width, size.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToMaxWidth:(CGFloat)width maxHeight:(CGFloat)height {
+    CGFloat oldWidth = image.size.width;
+    CGFloat oldHeight = image.size.height;
+    
+    CGFloat scaleFactor = (oldWidth > oldHeight) ? width / oldWidth : height / oldHeight;
+    
+    CGFloat newHeight = oldHeight * scaleFactor;
+    CGFloat newWidth = oldWidth * scaleFactor;
+    CGSize newSize = CGSizeMake(newWidth, newHeight);
+    
+    return [self imageWithImage:image scaledToSize:newSize];
+}
  
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
@@ -246,11 +350,15 @@
         CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
         
         CGFloat height = MAX(size.height, 44.0f);
-        
+         if ([remedyItem.description isEqualToString:@"No description"])
+             return 44;
         return height + (CELL_CONTENT_MARGIN * 2);
       } else  if (indexPath.section == 2) {
           // picture height
-          return 188.0f;
+          if(remedyItem.image ==nil)
+              return 44;
+          else
+              return 188.0f;
       } else {
         return 44; // return normal cell height
     }
@@ -273,7 +381,7 @@
     } else  if(indexPath.section == 1) {
         segueName = @"showRemedyDecription";
     } else  if(indexPath.section == 2) {
-        segueName = @"showTODO";
+        segueName = @"showImage";
     }else  if(indexPath.section == 3) {
         segueName = @"showContactInfo";
     }
@@ -313,6 +421,10 @@
             dest.description = @"";
         else
             dest.description = remedyItem.description;
+    }  else if ([segue.identifier isEqualToString:@"showImage"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        CameraViewController *dest = (CameraViewController * )navigationController;
+        dest.remedyItem = remedyItem;
     }
     else if ([segue.identifier isEqualToString:@"showContactInfo"]) {
         UINavigationController *navigationController = segue.destinationViewController;

@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 @interface RemedyItem : NSObject
 
@@ -18,4 +19,5 @@
 @property NSString *areaID;
 @property NSString *machineID;
 @property NSString *errorTypeID;
+@property UIImage *image;
 @end

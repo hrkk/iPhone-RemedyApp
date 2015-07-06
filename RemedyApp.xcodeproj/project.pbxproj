@@ -19,6 +19,7 @@
 		A771E8411B417A470018E94C /* LogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8401B417A470018E94C /* LogItem.m */; };
 		A771E8441B41BDDD0018E94C /* ContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8431B41BDDD0018E94C /* ContactInfoViewController.m */; };
 		A771E8471B41D13C0018E94C /* UserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8461B41D13C0018E94C /* UserItem.m */; };
+		A771E84A1B456FD70018E94C /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8491B456FD70018E94C /* CameraViewController.m */; };
 		A7CF22571B150009007EF1E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22561B150009007EF1E7 /* main.m */; };
 		A7CF225A1B150009007EF1E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22591B150009007EF1E7 /* AppDelegate.m */; };
 		A7CF225D1B150009007EF1E7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF225C1B150009007EF1E7 /* ViewController.m */; };
@@ -62,6 +63,8 @@
 		A771E8431B41BDDD0018E94C /* ContactInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactInfoViewController.m; sourceTree = "<group>"; };
 		A771E8451B41D13C0018E94C /* UserItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserItem.h; sourceTree = "<group>"; };
 		A771E8461B41D13C0018E94C /* UserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserItem.m; sourceTree = "<group>"; };
+		A771E8481B456FD70018E94C /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
+		A771E8491B456FD70018E94C /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
 		A7CF22511B150009007EF1E7 /* RemedyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemedyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7CF22551B150009007EF1E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7CF22561B150009007EF1E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				A771E83D1B37E03A0018E94C /* CustomImageCell.m */,
 				A771E8451B41D13C0018E94C /* UserItem.h */,
 				A771E8461B41D13C0018E94C /* UserItem.m */,
+				A771E8481B456FD70018E94C /* CameraViewController.h */,
+				A771E8491B456FD70018E94C /* CameraViewController.m */,
 			);
 			path = RemedyApp;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 				A7CF225A1B150009007EF1E7 /* AppDelegate.m in Sources */,
 				A73C52AE1B28D5A0004A27E6 /* RemedyItem.m in Sources */,
 				A73C52AB1B28329F004A27E6 /* RemedyTableViewController.m in Sources */,
+				A771E84A1B456FD70018E94C /* CameraViewController.m in Sources */,
 				A771E8441B41BDDD0018E94C /* ContactInfoViewController.m in Sources */,
 				A771E83E1B37E03A0018E94C /* CustomImageCell.m in Sources */,
 				A7CF22571B150009007EF1E7 /* main.m in Sources */,
