@@ -20,6 +20,8 @@
 		A771E8441B41BDDD0018E94C /* ContactInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8431B41BDDD0018E94C /* ContactInfoViewController.m */; };
 		A771E8471B41D13C0018E94C /* UserItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8461B41D13C0018E94C /* UserItem.m */; };
 		A771E84A1B456FD70018E94C /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8491B456FD70018E94C /* CameraViewController.m */; };
+		A7CA12F11B4B0AD00081BC55 /* RemedyListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CA12F01B4B0AD00081BC55 /* RemedyListTableViewController.m */; };
+		A7CA132C1B4DC0930081BC55 /* RemedyTableViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CA132B1B4DC0930081BC55 /* RemedyTableViewControllerExt.m */; };
 		A7CF22571B150009007EF1E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22561B150009007EF1E7 /* main.m */; };
 		A7CF225A1B150009007EF1E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22591B150009007EF1E7 /* AppDelegate.m */; };
 		A7CF225D1B150009007EF1E7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF225C1B150009007EF1E7 /* ViewController.m */; };
@@ -65,6 +67,10 @@
 		A771E8461B41D13C0018E94C /* UserItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserItem.m; sourceTree = "<group>"; };
 		A771E8481B456FD70018E94C /* CameraViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CameraViewController.h; sourceTree = "<group>"; };
 		A771E8491B456FD70018E94C /* CameraViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CameraViewController.m; sourceTree = "<group>"; };
+		A7CA12EF1B4B0AD00081BC55 /* RemedyListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyListTableViewController.h; sourceTree = "<group>"; };
+		A7CA12F01B4B0AD00081BC55 /* RemedyListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyListTableViewController.m; sourceTree = "<group>"; };
+		A7CA132A1B4DC0930081BC55 /* RemedyTableViewControllerExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyTableViewControllerExt.h; sourceTree = "<group>"; };
+		A7CA132B1B4DC0930081BC55 /* RemedyTableViewControllerExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyTableViewControllerExt.m; sourceTree = "<group>"; };
 		A7CF22511B150009007EF1E7 /* RemedyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemedyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7CF22551B150009007EF1E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7CF22561B150009007EF1E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -153,6 +159,10 @@
 				A771E8461B41D13C0018E94C /* UserItem.m */,
 				A771E8481B456FD70018E94C /* CameraViewController.h */,
 				A771E8491B456FD70018E94C /* CameraViewController.m */,
+				A7CA12EF1B4B0AD00081BC55 /* RemedyListTableViewController.h */,
+				A7CA12F01B4B0AD00081BC55 /* RemedyListTableViewController.m */,
+				A7CA132A1B4DC0930081BC55 /* RemedyTableViewControllerExt.h */,
+				A7CA132B1B4DC0930081BC55 /* RemedyTableViewControllerExt.m */,
 			);
 			path = RemedyApp;
 			sourceTree = "<group>";
@@ -293,6 +303,8 @@
 				A73C52AB1B28329F004A27E6 /* RemedyTableViewController.m in Sources */,
 				A771E84A1B456FD70018E94C /* CameraViewController.m in Sources */,
 				A771E8441B41BDDD0018E94C /* ContactInfoViewController.m in Sources */,
+				A7CA132C1B4DC0930081BC55 /* RemedyTableViewControllerExt.m in Sources */,
+				A7CA12F11B4B0AD00081BC55 /* RemedyListTableViewController.m in Sources */,
 				A771E83E1B37E03A0018E94C /* CustomImageCell.m in Sources */,
 				A7CF22571B150009007EF1E7 /* main.m in Sources */,
 				A771E83B1B36B5720018E94C /* RemedyViewControllerExt.m in Sources */,

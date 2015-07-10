@@ -31,7 +31,10 @@
        detailList = [NSArray arrayWithObjects:@"Machine 1", @"Machine 2", @"Machine 3",nil];
    } else if ([problemType isEqualToString:@"ERROR_TYPE"]) {
        detailList = [NSArray arrayWithObjects:@"Fatal", @"Cricical", @"Nice to have",nil];
+   } else if ([problemType isEqualToString:@"STATUS"]) {
+       detailList = [NSArray arrayWithObjects:@"New", @"Open", @"New (re-assign)", @"Fixed", @"Closed",nil];
    }
+    
     
 }
 
@@ -109,19 +112,17 @@
         NSLog(@"prepareForSegue : %@s", segue.identifier);
         RemedyTableViewController *dest = segue.destinationViewController;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        NSString *id = [detailList objectAtIndex:indexPath.row];
+//        NSString *id = [NSString stringWithFormat:@"%ld",indexPath.row];
         if ([problemType isEqualToString:@"AREA"]) {
-            NSString *id = [NSString stringWithFormat:@"%ld",
-                                   indexPath.row];
             dest.remedyItem.areaID = id;
         } else if ([problemType isEqualToString:@"MACHINE"]) {
-            NSString *id = [NSString stringWithFormat:@"%ld",
-                            indexPath.row];
             dest.remedyItem.machineID = id;
         }
         else if ([problemType isEqualToString:@"ERROR_TYPE"]) {
-            NSString *id = [NSString stringWithFormat:@"%ld",
-                            indexPath.row];
             dest.remedyItem.errorTypeID = id;
+        } else if ([problemType isEqualToString:@"STATUS"]) {
+            dest.remedyItem.status = id;
         }
     } else {
         RemedyTableViewController *dest = segue.destinationViewController;

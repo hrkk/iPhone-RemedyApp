@@ -10,10 +10,25 @@
 
 @implementation RemedyItem
 
+@synthesize id;
 @synthesize description;
 @synthesize areaID;
 @synthesize machineID;
 @synthesize errorTypeID;
 @synthesize image;
+@synthesize status;
+@synthesize assignedTo;
+
++ (id)createRemedyListItem:(NSString *)id description:(NSString *)description areaID:(NSString*)areaID status:(NSString*)status assignedTo:(NSString*)assignedTo;
+
+{
+    RemedyItem *newRemedyItem = [[self alloc] init];
+    newRemedyItem.id = id;
+    newRemedyItem.description = description;
+    newRemedyItem.areaID = areaID;
+    newRemedyItem.status = status;
+    newRemedyItem.assignedTo = assignedTo;
+    return newRemedyItem;
+}
 
 @end

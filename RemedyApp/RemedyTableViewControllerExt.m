@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Kasper Odgaard. All rights reserved.
 //
 
-#import "RemedyViewControllerExt.h"
+#import "RemedyTableViewControllerExt.h"
 #import "DetailSelectTableViewController.h"
 #import "ComposeViewController.h"
 #import "LogItem.h"
@@ -17,7 +17,7 @@
 #define CELL_CONTENT_WIDTH 320.0f // bredden af description
 #define CELL_CONTENT_MARGIN 20.0f
 
-@interface RemedyViewControllerExt (){
+@interface RemedyTableViewControllerExt (){
     NSArray *recipes;
     NSArray *problems;
     NSArray *contactInfos;
@@ -28,35 +28,35 @@
 
 @end
 
-@implementation RemedyViewControllerExt
+@implementation RemedyTableViewControllerExt
 
 @synthesize remedyItem;
 
 - (IBAction)unwindRemedy:(UIStoryboardSegue *)segue {
     NSLog(@"unwindToList metode in RemedyViewControllerExt");
     DetailSelectTableViewController *source = [segue sourceViewController];
-   remedyItem = source.remedyItem;
+    remedyItem = source.remedyItem;
     if(remedyItem != nil) {
         NSLog(@"remedyItem.areaID=%@",remedyItem.areaID);
         [self.tableView reloadData];
     }
-   // item = source.toDoItem;
-   // NSLog(@"  value=%@",item);
-   // if (item != nil) {
-        // change index 0
-        //   recipes[0] = item;
+    // item = source.toDoItem;
+    // NSLog(@"  value=%@",item);
+    // if (item != nil) {
+    // change index 0
+    //   recipes[0] = item;
     //    [self.tableView reloadData];
-   // }
+    // }
 }
 
 - (IBAction)unwindRemedyDescription:(UIStoryboardSegue *)segue {
-     NSLog(@"unwindRemedyDescription metode in RemedyViewControllerExt");
-     ComposeViewController *source = [segue sourceViewController];
-     NSLog(@"unwindRemedyDescription source.description %@ remedyItem.description %@ in RemedyViewControllerExt", source.description,remedyItem.description);
+    NSLog(@"unwindRemedyDescription metode in RemedyViewControllerExt");
+    ComposeViewController *source = [segue sourceViewController];
+    NSLog(@"unwindRemedyDescription source.description %@ remedyItem.description %@ in RemedyViewControllerExt", source.description,remedyItem.description);
     if (source.description != nil) {
         remedyItem.description =source.description;
         if ([remedyItem.description isEqualToString:@""])
-             remedyItem.description = @"No description";
+            remedyItem.description = @"No description";
         [self.tableView reloadData];
     }
 }
@@ -64,12 +64,12 @@
 - (IBAction)unwindRemedyPhoto:(UIStoryboardSegue *)segue {
     NSLog(@"unwindRemedyPhoto metode in RemedyViewControllerExt");
     CameraViewController *source = [segue sourceViewController];
-     if (source.description != nil) {
+    if (source.description != nil) {
         remedyItem.image = source.selectImage;
         [self.tableView reloadData];
-     }
+    }
     
-      // item = source.toDoItem;
+    // item = source.toDoItem;
     // NSLog(@"  value=%@",item);
     // if (item != nil) {
     // change index 0
@@ -79,11 +79,11 @@
 }
 
 /*
-
-- (void)viewWillAppear: (BOOL) animated {
-    NSLog(@"viewWillAppear metode in RemedyViewControllerExt");
-    [self.tableView reloadData];
-}
+ 
+ - (void)viewWillAppear: (BOOL) animated {
+ NSLog(@"viewWillAppear metode in RemedyViewControllerExt");
+ [self.tableView reloadData];
+ }
  */
 
 - (void)viewDidLoad {
@@ -100,7 +100,7 @@
     
     
     
-   logArray = [[NSMutableArray alloc] init];
+    logArray = [[NSMutableArray alloc] init];
     // add some data to the array
     LogItem *logItem1 = [[LogItem alloc] init];
     logItem1.username = @"Kasper O";
@@ -114,14 +114,19 @@
     logItem2.status = @"Assigned";
     logItem2.displayDateTime =@"1d";
     
-     [logArray addObject:logItem2];
+    [logArray addObject:logItem2];
     
-   
+    
     
     // create empty remedyItem
     if(remedyItem==nil) {
         remedyItem = [[RemedyItem alloc] init];
+        remedyItem.id = nil;
         remedyItem.description = @"No description";
+        remedyItem.areaID = @" ";
+        remedyItem.machineID = @" ";
+        remedyItem.errorTypeID = @" ";
+        remedyItem.status = @" ";
         // Navigation Title
         self.navigationItem.title=  @"Create";
     } else {
@@ -138,35 +143,39 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if(section == 0){
+       return 1;
+    } else if(section == 1){
         return [problems count];
-    } else  if(section == 1){
-        return 1;
     } else  if(section == 2){
-         return 1;
-    } else if(section == 3) {
-        return [logArray count];
+        return 1;
+    } else  if(section == 3){
+        return 1;
     } else if(section == 4) {
+        return [logArray count];
+    } else if(section == 5) {
     }
-  
+    
     return 2;
-
+    
 }
 
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 4;
+    return 5;
     
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:   (NSInteger)section
 {
-    if (section == 0) {
+    if(section ==0) {
+        return @"Status";
+    } else if (section == 1) {
         return @"Problem";
-    } else if(section == 1) {
-        return @"Short description";
     } else if(section == 2) {
-        return @"Picture";
+        return @"Short description";
     } else if(section == 3) {
+        return @"Picture";
+    } else if(section == 4) {
         return @"Log";
     } else {
         return @"Log";
@@ -206,12 +215,17 @@
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    
     if(indexPath.section == 0) {
+        cell.textLabel.text = @"Status";
+        cell.detailTextLabel.text= remedyItem.status;
+
+    }
+    
+    else if(indexPath.section == 1) {
         cell.textLabel.text = [problems objectAtIndex:indexPath.row];
         // Area
         if (indexPath.row == 0) {
-             cell.detailTextLabel.text = remedyItem.areaID;
+            cell.detailTextLabel.text = remedyItem.areaID;
         } else if (indexPath.row == 1) {
             cell.detailTextLabel.text = remedyItem.machineID;
         } else if (indexPath.row == 2) {
@@ -220,11 +234,11 @@
         else {
             cell.detailTextLabel.text = @"buh";
         }
-    } else if(indexPath.section == 1) {
+    } else if(indexPath.section == 2) {
         UITableViewCell *descriptionCell = [tableView dequeueReusableCellWithIdentifier:remedyDescriptionCellTableIdentifier];
         descriptionCell.textLabel.numberOfLines = 0;
         descriptionCell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-      // descriptionCell.textLabel.text = @"jdnjc dcbcdh cdc dhc dc dc dc djnc djnc dnc dc c sc nsjddd ks kasper Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Kasper Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat K nulla jncdjscndjdcndjscn dcndjcndjsc sdc dsnc dnc d cd cdn cjdkjdncjdfnvdfjv sidste";
+        // descriptionCell.textLabel.text = @"jdnjc dcbcdh cdc dhc dc dc dc djnc djnc dnc dc c sc nsjddd ks kasper Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Kasper Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat K nulla jncdjscndjdcndjscn dcndjcndjsc sdc dsnc dnc d cd cdn cjdkjdncjdfnvdfjv sidste";
         descriptionCell.textLabel.text =  remedyItem.description;
         if ([descriptionCell.textLabel.text isEqualToString:@"No description"]) {
             descriptionCell.textLabel.font = [UIFont italicSystemFontOfSize:16.0];
@@ -233,82 +247,82 @@
         }
         
         cell = descriptionCell;
-    } else if(indexPath.section == 2) {
+    } else if(indexPath.section == 3) {
         /*
-        UITableViewCell *customerCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+         UITableViewCell *customerCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+         
+         
+         UIImageView *pic = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"glad.jpg"]];
+         pic.center = CGPointMake(cell.contentView.bounds.size.width / 2 , 60);
+         pic.contentMode = UIViewContentModeScaleAspectFit;
+         customerCell.selectionStyle = UITableViewCellSelectionStyleGray;
+         [customerCell.contentView addSubview:pic];
+         
+         return customerCell;
+         */
         
-       
-        UIImageView *pic = [[UIImageView alloc] initWithImage: [UIImage imageNamed:@"glad.jpg"]];
-        pic.center = CGPointMake(cell.contentView.bounds.size.width / 2 , 60);
-        pic.contentMode = UIViewContentModeScaleAspectFit;
-        customerCell.selectionStyle = UITableViewCellSelectionStyleGray;
-        [customerCell.contentView addSubview:pic];
-        
-        return customerCell;
-        */
-        
-     //
+        //
         UITableViewCell *customerCell = [tableView dequeueReusableCellWithIdentifier:customImageCellTableIdentifier];
-       UIImageView *problemPicImageView = (UIImageView *)[customerCell viewWithTag:1000];
-       UILabel *problemPicLabel = (UILabel *)[customerCell viewWithTag:1001];
+        UIImageView *problemPicImageView = (UIImageView *)[customerCell viewWithTag:1000];
+        UILabel *problemPicLabel = (UILabel *)[customerCell viewWithTag:1001];
         
         if(remedyItem.image ==nil){
-         problemPicLabel.hidden = NO;
+            problemPicLabel.hidden = NO;
         } else {
             problemPicLabel.hidden = YES;
         }
-
+        
         
         UIImage *orgImg =  remedyItem.image; // [UIImage imageNamed:@"glad.jpg"];
         // resize 1
         /*
-        CGRect rect = CGRectMake(0,0,175,175);
-        UIGraphicsBeginImageContext( rect.size );
-        [orgImg drawInRect:rect];
-        UIImage *picture1 = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        
-        NSData *imageData = UIImagePNGRepresentation(picture1);
-        UIImage *img=[UIImage imageWithData:imageData];
-        */
+         CGRect rect = CGRectMake(0,0,175,175);
+         UIGraphicsBeginImageContext( rect.size );
+         [orgImg drawInRect:rect];
+         UIImage *picture1 = UIGraphicsGetImageFromCurrentImageContext();
+         UIGraphicsEndImageContext();
+         
+         NSData *imageData = UIImagePNGRepresentation(picture1);
+         UIImage *img=[UIImage imageWithData:imageData];
+         */
         // resize 2
         
         /*
-        CGRect rect = CGRectMake(0,0,175,175);
-        CGSize newSize =rect.size;
-        CGFloat scale = [[UIScreen mainScreen]scale];
-        //You can remove the below comment if you dont want to scale the image in retina   device .Dont // forget to comment UIGraphicsBeginImageContextWithOptions
-        //UIGraphicsBeginImageContext(newSize);
-        UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-        [orgImg drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
-        UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
-        UIGraphicsEndImageContext();
-        */
+         CGRect rect = CGRectMake(0,0,175,175);
+         CGSize newSize =rect.size;
+         CGFloat scale = [[UIScreen mainScreen]scale];
+         //You can remove the below comment if you dont want to scale the image in retina   device .Dont // forget to comment UIGraphicsBeginImageContextWithOptions
+         //UIGraphicsBeginImageContext(newSize);
+         UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+         [orgImg drawInRect:CGRectMake(0,0,newSize.width,newSize.height)];
+         UIImage* newImage = UIGraphicsGetImageFromCurrentImageContext();
+         UIGraphicsEndImageContext();
+         */
         
         // resize 3
         
         UIImage *myResizedImage = [self imageWithImage:orgImg
-                                                scaledToMaxWidth:175
-                                                       maxHeight:175];
+                                      scaledToMaxWidth:175
+                                             maxHeight:175];
         problemPicImageView.image =myResizedImage;
         
         // sørger for at hele billede kan ses
-       //   problemPicImageView.contentMode = UIViewContentModeCenter;
+        //   problemPicImageView.contentMode = UIViewContentModeCenter;
         
-       //  problemPicImageView.contentMode = UIViewContentModeScaleAspectFit;
-
+        //  problemPicImageView.contentMode = UIViewContentModeScaleAspectFit;
+        
         cell = customerCell;
-       // cell.textLabel.text = @"Show large picture";
-   // 2    cell.imageView.image = [UIImage imageNamed:@"glad.jpg"];
-   // 3     cell.textLabel.text = @"Click for large pic";
-   // 4     cell.detailTextLabel.text = @"";
+        // cell.textLabel.text = @"Show large picture";
+        // 2    cell.imageView.image = [UIImage imageNamed:@"glad.jpg"];
+        // 3     cell.textLabel.text = @"Click for large pic";
+        // 4     cell.detailTextLabel.text = @"";
         return cell;
-    }  else if(indexPath.section == 3) {
+    }  else if(indexPath.section == 4) {
         UITableViewCell *logCell = [tableView dequeueReusableCellWithIdentifier:logCellTableIdentifier];
         LogItem *logItem = [logArray objectAtIndex:indexPath.row];
         logCell.textLabel.text = logItem.username;
         NSString *detailTextLabel = [NSString stringWithFormat:@"%@ - %@", logItem.status,
-                               logItem.displayDateTime];
+                                     logItem.displayDateTime];
         logCell.detailTextLabel.text = detailTextLabel;
         cell = logCell;
     } else if(indexPath.section == 5) {
@@ -343,29 +357,29 @@
     
     return [self imageWithImage:image scaledToSize:newSize];
 }
- 
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath;
 {
-      if (indexPath.section == 1) {  // the cell you want to be dynamic
+    if (indexPath.section == 2) {  // the cell you want to be dynamic
         
-          NSString *text =  remedyItem.description;
-// @"jdnjc dcbcdh cdc dhc dc dc dc djnc djnc dnc dc c sc nsjddd ks kasper Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Kasper Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat K nulla jncdjscndjdcndjscn dcndjcndjsc sdc dsnc dnc d cd cdn cjdkjdncjdfnvdfjv sidste";
-          
+        NSString *text =  remedyItem.description;
+        // @"jdnjc dcbcdh cdc dhc dc dc dc djnc djnc dnc dc c sc nsjddd ks kasper Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Kasper Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat K nulla jncdjscndjdcndjscn dcndjcndjsc sdc dsnc dnc d cd cdn cjdkjdncjdfnvdfjv sidste";
+        
         CGSize constraint = CGSizeMake(CELL_CONTENT_WIDTH - (CELL_CONTENT_MARGIN * 2), 20000.0f);
         CGSize size = [text sizeWithFont:[UIFont systemFontOfSize:FONT_SIZE] constrainedToSize:constraint lineBreakMode:NSLineBreakByWordWrapping];
         
         CGFloat height = MAX(size.height, 44.0f);
-         if ([remedyItem.description isEqualToString:@"No description"])
-             return 44;
+        if ([remedyItem.description isEqualToString:@"No description"])
+            return 44;
         return height + (CELL_CONTENT_MARGIN * 2);
-      } else  if (indexPath.section == 2) {
-          // picture height
-          if(remedyItem.image ==nil)
-              return 44;
-          else
-              return 188.0f;
-      } else {
+    } else  if (indexPath.section == 3) {
+        // picture height
+        if(remedyItem.image ==nil)
+            return 44;
+        else
+            return 188.0f;
+    } else {
         return 44; // return normal cell height
     }
 }
@@ -382,13 +396,13 @@
 {
     NSString *segueName = nil;
     
-    if(indexPath.section ==0) {
+    if(indexPath.section ==0 || indexPath.section ==1) {
         segueName = @"showRemedySelect";
-    } else  if(indexPath.section == 1) {
-        segueName = @"showRemedyDecription";
     } else  if(indexPath.section == 2) {
+        segueName = @"showRemedyDecription";
+    } else  if(indexPath.section == 3) {
         segueName = @"showImage";
-    }else  if(indexPath.section == 3) {
+    }else  if(indexPath.section == 4) {
         segueName = @"showContactInfo";
     }
     
@@ -410,10 +424,12 @@
         UINavigationController *navigationController = segue.destinationViewController;
         DetailSelectTableViewController *dest = (DetailSelectTableViewController * )navigationController;
         if(indexPath.section==0 && indexPath.row ==0)
+            dest.problemType = @"STATUS";            
+        else if(indexPath.section==1 && indexPath.row ==0)
             dest.problemType = @"AREA";
-        else if(indexPath.section==0 && indexPath.row ==1)
+        else if(indexPath.section==1 && indexPath.row ==1)
             dest.problemType = @"MACHINE";
-        else if(indexPath.section==0 && indexPath.row ==2)
+        else if(indexPath.section==1 && indexPath.row ==2)
             dest.problemType = @"ERROR_TYPE";
         dest.remedyItem = remedyItem;
     }
