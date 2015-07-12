@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>5C82A6E5-C81F-4918-9D7C-05EEDB64B909</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>RemedyApp</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>A1E43CF75C753CF05654028AA6BD6F56A261E090</key>
 		<string>https://github.com/hrkk/iPhone-RemedyApp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>RemedyApp.xcodeproj/project.xcworkspace</string>
+	<string>RemedyApp.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>A1E43CF75C753CF05654028AA6BD6F56A261E090</key>

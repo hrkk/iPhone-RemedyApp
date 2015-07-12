@@ -13,7 +13,6 @@
 		A73C52B11B2F0051004A27E6 /* DetailSelectTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52B01B2F0051004A27E6 /* DetailSelectTableViewController.m */; };
 		A73C52B41B30BF44004A27E6 /* RemedyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52B31B30BF44004A27E6 /* RemedyViewController.m */; };
 		A73C52B61B3302BA004A27E6 /* glad.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A73C52B51B3302BA004A27E6 /* glad.jpg */; };
-		A73C52B81B3304B4004A27E6 /* 20150605_122742.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A73C52B71B3304B4004A27E6 /* 20150605_122742.jpg */; };
 		A771E83B1B36B5720018E94C /* RemedyViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E83A1B36B5720018E94C /* RemedyViewControllerExt.m */; };
 		A771E83E1B37E03A0018E94C /* CustomImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E83D1B37E03A0018E94C /* CustomImageCell.m */; };
 		A771E8411B417A470018E94C /* LogItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8401B417A470018E94C /* LogItem.m */; };
@@ -22,6 +21,8 @@
 		A771E84A1B456FD70018E94C /* CameraViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A771E8491B456FD70018E94C /* CameraViewController.m */; };
 		A7CA12F11B4B0AD00081BC55 /* RemedyListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CA12F01B4B0AD00081BC55 /* RemedyListTableViewController.m */; };
 		A7CA132C1B4DC0930081BC55 /* RemedyTableViewControllerExt.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CA132B1B4DC0930081BC55 /* RemedyTableViewControllerExt.m */; };
+		A7CA13F81B523E4D0081BC55 /* icon-100.png in Resources */ = {isa = PBXBuildFile; fileRef = A7CA13F71B523E4D0081BC55 /* icon-100.png */; };
+		A7CA13FB1B524A550081BC55 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CA13FA1B524A550081BC55 /* SettingsViewController.m */; };
 		A7CF22571B150009007EF1E7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22561B150009007EF1E7 /* main.m */; };
 		A7CF225A1B150009007EF1E7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22591B150009007EF1E7 /* AppDelegate.m */; };
 		A7CF225D1B150009007EF1E7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF225C1B150009007EF1E7 /* ViewController.m */; };
@@ -54,7 +55,6 @@
 		A73C52B21B30BF44004A27E6 /* RemedyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyViewController.h; sourceTree = "<group>"; };
 		A73C52B31B30BF44004A27E6 /* RemedyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyViewController.m; sourceTree = "<group>"; };
 		A73C52B51B3302BA004A27E6 /* glad.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = glad.jpg; sourceTree = "<group>"; };
-		A73C52B71B3304B4004A27E6 /* 20150605_122742.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 20150605_122742.jpg; sourceTree = "<group>"; };
 		A771E8391B36B5720018E94C /* RemedyViewControllerExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RemedyViewControllerExt.h; path = ../RemedyViewControllerExt.h; sourceTree = "<group>"; };
 		A771E83A1B36B5720018E94C /* RemedyViewControllerExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = RemedyViewControllerExt.m; path = ../RemedyViewControllerExt.m; sourceTree = "<group>"; };
 		A771E83C1B37E03A0018E94C /* CustomImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomImageCell.h; sourceTree = "<group>"; };
@@ -71,6 +71,9 @@
 		A7CA12F01B4B0AD00081BC55 /* RemedyListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyListTableViewController.m; sourceTree = "<group>"; };
 		A7CA132A1B4DC0930081BC55 /* RemedyTableViewControllerExt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyTableViewControllerExt.h; sourceTree = "<group>"; };
 		A7CA132B1B4DC0930081BC55 /* RemedyTableViewControllerExt.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyTableViewControllerExt.m; sourceTree = "<group>"; };
+		A7CA13F71B523E4D0081BC55 /* icon-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-100.png"; sourceTree = "<group>"; };
+		A7CA13F91B524A550081BC55 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		A7CA13FA1B524A550081BC55 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		A7CF22511B150009007EF1E7 /* RemedyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemedyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A7CF22551B150009007EF1E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7CF22561B150009007EF1E7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -126,11 +129,11 @@
 		A7CF22531B150009007EF1E7 /* RemedyApp */ = {
 			isa = PBXGroup;
 			children = (
+				A7CA13F71B523E4D0081BC55 /* icon-100.png */,
 				A771E83F1B417A470018E94C /* LogItem.h */,
 				A771E8401B417A470018E94C /* LogItem.m */,
 				A771E8391B36B5720018E94C /* RemedyViewControllerExt.h */,
 				A771E83A1B36B5720018E94C /* RemedyViewControllerExt.m */,
-				A73C52B71B3304B4004A27E6 /* 20150605_122742.jpg */,
 				A73C52B51B3302BA004A27E6 /* glad.jpg */,
 				A7CF227A1B150396007EF1E7 /* creme_brelee.jpg */,
 				A7CF22581B150009007EF1E7 /* AppDelegate.h */,
@@ -163,6 +166,8 @@
 				A7CA12F01B4B0AD00081BC55 /* RemedyListTableViewController.m */,
 				A7CA132A1B4DC0930081BC55 /* RemedyTableViewControllerExt.h */,
 				A7CA132B1B4DC0930081BC55 /* RemedyTableViewControllerExt.m */,
+				A7CA13F91B524A550081BC55 /* SettingsViewController.h */,
+				A7CA13FA1B524A550081BC55 /* SettingsViewController.m */,
 			);
 			path = RemedyApp;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				TargetAttributes = {
 					A7CF22501B150009007EF1E7 = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = WKZKJFL933;
 					};
 					A7CF22691B150009007EF1E7 = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -277,7 +283,7 @@
 				A7CF227B1B150396007EF1E7 /* creme_brelee.jpg in Resources */,
 				A7CF22651B150009007EF1E7 /* LaunchScreen.xib in Resources */,
 				A73C52B61B3302BA004A27E6 /* glad.jpg in Resources */,
-				A73C52B81B3304B4004A27E6 /* 20150605_122742.jpg in Resources */,
+				A7CA13F81B523E4D0081BC55 /* icon-100.png in Resources */,
 				A7CF22621B150009007EF1E7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -305,6 +311,7 @@
 				A771E8441B41BDDD0018E94C /* ContactInfoViewController.m in Sources */,
 				A7CA132C1B4DC0930081BC55 /* RemedyTableViewControllerExt.m in Sources */,
 				A7CA12F11B4B0AD00081BC55 /* RemedyListTableViewController.m in Sources */,
+				A7CA13FB1B524A550081BC55 /* SettingsViewController.m in Sources */,
 				A771E83E1B37E03A0018E94C /* CustomImageCell.m in Sources */,
 				A7CF22571B150009007EF1E7 /* main.m in Sources */,
 				A771E83B1B36B5720018E94C /* RemedyViewControllerExt.m in Sources */,
@@ -389,7 +396,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -427,7 +434,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -439,9 +446,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RemedyApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -449,9 +459,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = RemedyApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

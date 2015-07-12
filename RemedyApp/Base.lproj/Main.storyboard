@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="WiB-p0-dXO">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -70,55 +69,93 @@
         <!--Profil Settings Controller-->
         <scene sceneID="Ets-gB-tGy">
             <objects>
-                <viewController title="Profil Settings Controller" id="Dpu-xb-vPO" sceneMemberID="viewController">
+                <viewController title="Profil Settings Controller" id="Dpu-xb-vPO" customClass="SettingsViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="h1j-Tg-NNA"/>
                         <viewControllerLayoutGuide type="bottom" id="zx7-eS-D8P"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="WvT-na-HhA">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="900"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Du har ikke valgt din profil - vælg en eller flere" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iBP-pl-FzB">
-                                <rect key="frame" x="16" y="72" width="568" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TaL-z3-8Hs">
-                                <rect key="frame" x="138" y="140" width="51" height="31"/>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Area1" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S52-6Q-iqh">
-                                <rect key="frame" x="16" y="111" width="45" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Area2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y9L-Qd-62P">
-                                <rect key="frame" x="16" y="150" width="45" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="(Angiver de områder du vil modtage notifikationer på)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YaD-IH-u9g">
-                                <rect key="frame" x="16" y="179" width="407" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="l1m-f0-WDL">
-                                <rect key="frame" x="138" y="101" width="51" height="31"/>
-                            </switch>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WbH-0n-Bf2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="900"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rhI-PX-wGI">
+                                        <rect key="frame" x="0.0" y="65" width="600" height="835"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mM1-63-L4k">
+                                                <rect key="frame" x="8" y="8" width="584" height="54"/>
+                                                <string key="text">Det er først gang du logger ind og du skal opsætte din profil.
+Profil:</string>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="rHJ-b3-CXI">
+                                                <rect key="frame" x="101" y="70" width="51" height="31"/>
+                                            </switch>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Technical" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5UU-Sd-5hN">
+                                                <rect key="frame" x="8" y="80" width="72" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Operator" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h8D-X1-g5R">
+                                                <rect key="frame" x="8" y="119" width="72" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="1Al-6m-1vf">
+                                                <rect key="frame" x="101" y="109" width="51" height="31"/>
+                                            </switch>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Angiver de &quot;area&quot;s du vil modtage notifikationer på. Vælg en eller flere:" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v8w-KH-Fjw">
+                                                <rect key="frame" x="8" y="161" width="474" height="21"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="v8w-KH-Fjw" firstAttribute="leading" secondItem="rhI-PX-wGI" secondAttribute="leading" constant="8" id="PYY-9j-lf4"/>
+                                            <constraint firstAttribute="trailing" secondItem="mM1-63-L4k" secondAttribute="trailing" constant="8" id="kK4-st-jdr"/>
+                                            <constraint firstItem="mM1-63-L4k" firstAttribute="top" secondItem="rhI-PX-wGI" secondAttribute="top" constant="8" id="lXF-Nc-YIR"/>
+                                            <constraint firstItem="mM1-63-L4k" firstAttribute="leading" secondItem="rhI-PX-wGI" secondAttribute="leading" constant="8" id="rnf-PK-00z"/>
+                                            <constraint firstAttribute="trailing" secondItem="v8w-KH-Fjw" secondAttribute="trailing" constant="118" id="zsf-rn-spb"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="rhI-PX-wGI" secondAttribute="trailing" id="FcZ-xP-FYh"/>
+                                    <constraint firstItem="rhI-PX-wGI" firstAttribute="top" secondItem="WbH-0n-Bf2" secondAttribute="top" id="T1F-3p-sNh"/>
+                                    <constraint firstAttribute="bottom" secondItem="rhI-PX-wGI" secondAttribute="bottom" id="WkE-6R-weC"/>
+                                    <constraint firstItem="rhI-PX-wGI" firstAttribute="width" secondItem="WbH-0n-Bf2" secondAttribute="width" id="YNJ-fh-b1c"/>
+                                    <constraint firstItem="rhI-PX-wGI" firstAttribute="leading" secondItem="WbH-0n-Bf2" secondAttribute="leading" id="ngx-w5-AEv"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WbH-0n-Bf2" firstAttribute="leading" secondItem="WvT-na-HhA" secondAttribute="leading" id="CvO-id-6iX"/>
+                            <constraint firstAttribute="trailing" secondItem="WbH-0n-Bf2" secondAttribute="trailing" id="EdI-yb-JE2"/>
+                            <constraint firstItem="zx7-eS-D8P" firstAttribute="top" secondItem="WbH-0n-Bf2" secondAttribute="bottom" id="LuJ-vb-fPX"/>
+                            <constraint firstItem="WbH-0n-Bf2" firstAttribute="top" secondItem="WvT-na-HhA" secondAttribute="top" id="NaO-LN-7Rd"/>
+                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="BMf-RW-sD9">
+                    <navigationItem key="navigationItem" title="Settings" id="BMf-RW-sD9">
                         <barButtonItem key="rightBarButtonItem" title="Save" id="84J-ow-xtR">
                             <connections>
                                 <segue destination="fwN-7g-0vd" kind="presentation" id="nUg-Ko-fHK"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="600" height="900"/>
+                    <connections>
+                        <outlet property="subView" destination="rhI-PX-wGI" id="CIa-IP-XBY"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OGz-ED-8kB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -140,16 +177,19 @@
                                 <rect key="frame" x="16" y="285" width="568" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Søg med id">
+                                <state key="normal" title="List all">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="deM-2O-rNC" kind="show" id="yL4-CL-PUp"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4B-RU-8Es">
                                 <rect key="frame" x="16" y="247" width="568" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Opret">
+                                <state key="normal" title="Create new">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -161,12 +201,12 @@
                                 <rect key="frame" x="16" y="323" width="568" height="30"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                <state key="normal" title="Oversigt">
+                                <state key="normal" title="Settings">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <segue destination="deM-2O-rNC" kind="show" id="ZMQ-0d-8Hk"/>
+                                    <segue destination="Dpu-xb-vPO" kind="show" id="REm-Rp-SR2"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Kasper Odgaard" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJB-2L-7ue">
@@ -271,7 +311,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="4778" y="357"/>
+            <point key="canvasLocation" x="3714" y="1077"/>
         </scene>
         <!--Remedy Table View Controller Ext-->
         <scene sceneID="vCT-jW-p1s">
@@ -401,7 +441,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9jO-oD-YT5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3804" y="1265"/>
+            <point key="canvasLocation" x="3708" y="1865"/>
         </scene>
         <!--Remedy View Controller Ext-->
         <scene sceneID="g78-Jn-G7X">
@@ -838,6 +878,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="0l5-L1-P0B"/>
+        <segue reference="THF-3u-SOw"/>
+        <segue reference="REm-Rp-SR2"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
-    UIImage *image =  [UIImage imageNamed:@"creme_brelee.jpg"];
+    UIImage *image =  [UIImage imageNamed:@"icon-100.png"];
     logonImage.image = image;
     // sørger for at hele billede kan ses
     logonImage.contentMode = UIViewContentModeCenter;
