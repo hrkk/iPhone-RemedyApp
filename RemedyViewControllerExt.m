@@ -124,6 +124,9 @@
         remedyItem.description = @"No description";
         // Navigation Title
         self.navigationItem.title=  @"Create";
+        UIBarButtonItem *saveButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSave target:self action:@selector(saveItem)];
+        
+        self.navigationItem.rightBarButtonItem = saveButton;
     } else {
         NSString *title = [NSString stringWithFormat:@"#%@", remedyItem.id];
         self.navigationItem.title=  title;
@@ -438,6 +441,9 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         LogItem *logItem = [logArray objectAtIndex:indexPath.row];
         dest.userId =logItem.userId;
+    }  else if ([segue.identifier isEqualToString:@"showMenu"]) {
+        NSLog(@"prepareForSegue showMenu");
+
     }
 }
 

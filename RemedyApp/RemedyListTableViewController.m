@@ -20,6 +20,24 @@
 @synthesize remedySearchBar;
 @synthesize remedyList;
 
+- (IBAction)unwindToRemedyList:(UIStoryboardSegue *)segue {
+    NSLog(@"unwindToRemedyList metode in RemedyListTableViewController");
+  //  DetailSelectTableViewController *source = [segue sourceViewController];
+  //  remedyItem = source.remedyItem;
+  //  if(remedyItem != nil) {
+  //      NSLog(@"remedyItem.areaID=%@",remedyItem.areaID);
+  //      [self.tableView reloadData];
+  //  }
+    // item = source.toDoItem;
+    // NSLog(@"  value=%@",item);
+    // if (item != nil) {
+    // change index 0
+    //   recipes[0] = item;
+    //    [self.tableView reloadData];
+    // }
+}
+
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -28,17 +46,33 @@
     
     // Initialize table data
     
+    SelectItem *area1 = [SelectItem createSelectItem:@"areaID1" text:@"area1"];
+    SelectItem *area2 = [SelectItem createSelectItem:@"areaID2" text:@"area2"];
+    SelectItem *area3 = [SelectItem createSelectItem:@"areaID3" text:@"area3"];
+    SelectItem *area5 = [SelectItem createSelectItem:@"areaID5" text:@"area5"];
+    
+    SelectItem *statusNew = [SelectItem createSelectItem:@"statusID1" text:@"New"];
+    SelectItem *statusOpen = [SelectItem createSelectItem:@"statusID2" text:@"Open"];
+    SelectItem *statusNewReassign = [SelectItem createSelectItem:@"statusID3" text:@"New (re-assign)"];
+    
+    SelectItem *statusFixed = [SelectItem createSelectItem:@"statusID4" text:@"Fixed"];
+    SelectItem *statusNotOk = [SelectItem createSelectItem:@"statusID5" text:@"Test Not Ok"];
+    SelectItem *statusNoReproduce = [SelectItem createSelectItem:@"statusID6" text:@"No reproduce"];
+    SelectItem *statusClosed = [SelectItem createSelectItem:@"statusID7" text:@"Closed"];
+
+
+    
     remedyList = [NSArray arrayWithObjects:
-                  [RemedyItem createRemedyListItem:@"1" description:@"chocolate bar chocolate chip dark chocolate ollipop" areaID:@"area1" status:@"New" assignedTo:@""],
-                  [RemedyItem createRemedyListItem:@"2" description:@"chocolate chip" areaID:@"area1" status:@"New" assignedTo:@""],
-                  [RemedyItem createRemedyListItem:@"3" description:@"dark chocolate" areaID:@"area1" status:@"Open" assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"4" description:@"lollipop" areaID:@"area2" status:@"Open" assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"5" description:@"candy cane" areaID:@"area2" status:@"New (re-assign)" assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"6" description:@"jaw breaker" areaID:@"area3" status:@"Open" assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"6" description:@"caramel" areaID:@"area3" status:@"Fixed" assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"7" description:@"sour chew" areaID:@"area3" status:@"Test Not Ok" assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"8" description:@"peanut butter cup" areaID:@"area5" status:@"No reproduce" assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"9" description:@"gummi bear" areaID:@"area5" status:@"Closed" assignedTo:@"Kasper Odgaard"], nil];
+                  [RemedyItem createRemedyListItem:@"1" description:@"machine1 is broken" areaID:area1 status:statusNew assignedTo:@""],
+                  [RemedyItem createRemedyListItem:@"2" description:@"machine2 makes a noise and is not working" areaID:area1 status:statusNew assignedTo:@""],
+                  [RemedyItem createRemedyListItem:@"3" description:@"machine is programmed wrong" areaID:area1 status:statusOpen assignedTo:@"Kasper Odgaard"],
+                  [RemedyItem createRemedyListItem:@"4" description:@"Some is wrong" areaID:area2 status:statusOpen assignedTo:@"Kasper Odgaard"],
+                  [RemedyItem createRemedyListItem:@"5" description:@"MachineX Major failure " areaID:area2 status:statusNewReassign assignedTo:@"Kasper Odgaard"],
+                  [RemedyItem createRemedyListItem:@"6" description:@"No light in display" areaID:area3 status:statusOpen assignedTo:@"Kasper Odgaard"],
+                  [RemedyItem createRemedyListItem:@"7" description:@"No more XXX" areaID:area3 status:statusFixed assignedTo:@"Kasper Odgaard"],
+                  [RemedyItem createRemedyListItem:@"8" description:@"Machine3 is running slow" areaID:area3 status:statusNotOk assignedTo:@"Kasper Odgaard"],
+                  [RemedyItem createRemedyListItem:@"9" description:@"No more plastic in machine" areaID:area5 status:statusNoReproduce assignedTo:@"Kasper Odgaard"],
+                  [RemedyItem createRemedyListItem:@"10" description:@"Wrong size" areaID:area5 status:statusClosed assignedTo:@"Kasper Odgaard"], nil];
     
     // Initialize the filteredCandyArray with a capacity equal to the candyArray's capacity
     self.filteredRemedyList = [NSMutableArray arrayWithCapacity:[remedyList count]];
@@ -94,16 +128,13 @@
     cell.textLabel.text = textLabel;
     NSString *detailTextLabel;
     if ([item.assignedTo isEqualToString:@""]) {
-        detailTextLabel = [NSString stringWithFormat:@"Status: %@ Area: %@", item.status,
-                           item.areaID];
+        detailTextLabel = [NSString stringWithFormat:@"Status: %@ Area: %@", item.status.text, item.areaID.text];
     } else {
-    detailTextLabel = [NSString stringWithFormat:@"Status: %@ Area: %@ Assigned to: %@", item.status,
-                           item.areaID, item.assignedTo];
-   
+        detailTextLabel = [NSString stringWithFormat:@"Status: %@ Area: %@ Assigned to: %@", item.status.text, item.areaID.text, item.assignedTo];
     }
-     cell.detailTextLabel.text = detailTextLabel;
+        cell.detailTextLabel.text = detailTextLabel;
     
-    return cell;
+        return cell;
 }
 
 
@@ -163,7 +194,7 @@
        
          filteredRemedyList = [NSMutableArray arrayWithArray:[remedyList filteredArrayUsingPredicate:predicate]];
     } else if([scope isEqualToString:@"Area"]) {
-          NSPredicate *predicateArea = [NSPredicate predicateWithFormat:@"areaID contains[c] %@",searchText];
+          NSPredicate *predicateArea = [NSPredicate predicateWithFormat:@"areaID.text contains[c] %@",searchText];
          filteredRemedyList = [NSMutableArray arrayWithArray:[remedyList filteredArrayUsingPredicate:predicateArea]];
     }
 }

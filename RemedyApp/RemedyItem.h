@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import "SelectItem.h"
 
 @interface RemedyItem : NSObject
 
@@ -18,12 +19,12 @@
 
 @property NSString *id;
 @property NSString *description;
-@property NSString *areaID;
-@property NSString *machineID;
-@property NSString *errorTypeID;
+@property SelectItem *areaID;
+@property SelectItem *machineID;
+@property SelectItem *errorTypeID;
 @property UIImage *image;
-@property NSString *status;
+@property SelectItem *status;
 @property NSString *assignedTo;
 
-+ (id)createRemedyListItem:(NSString*)id description:(NSString*)description areaID:(NSString*)areaID status:(NSString*)status assignedTo:(NSString*)assignedTo;
++ (id)createRemedyListItem:(NSString*)id description:(NSString*)description areaID:(SelectItem*)areaID status:(SelectItem*)status assignedTo:(NSString*)assignedTo;
 @end

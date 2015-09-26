@@ -19,8 +19,7 @@
 @synthesize status;
 @synthesize assignedTo;
 
-+ (id)createRemedyListItem:(NSString *)id description:(NSString *)description areaID:(NSString*)areaID status:(NSString*)status assignedTo:(NSString*)assignedTo;
-
++ (id)createRemedyListItem:(NSString *)id description:(NSString *)description areaID:(SelectItem*)areaID status:(SelectItem*)status assignedTo:(NSString*)assignedTo;
 {
     RemedyItem *newRemedyItem = [[self alloc] init];
     newRemedyItem.id = id;

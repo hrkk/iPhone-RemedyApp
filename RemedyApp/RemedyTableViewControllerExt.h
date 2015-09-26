@@ -10,8 +10,12 @@
 #import "RemedyItem.h"
 
 @interface RemedyTableViewControllerExt : UITableViewController
+- (IBAction)save:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
 
 - (IBAction)unwindRemedy:(UIStoryboardSegue *)segue;
+
 @property RemedyItem *remedyItem;
 
 @end

@@ -10,9 +10,12 @@
 #import "RemedyItem.h"
 
 
-@interface DetailSelectTableViewController : UITableViewController
+@interface DetailSelectTableViewController : UITableViewController {
+     UIActivityIndicatorView *_activityIndicatorView;
+}
 
 @property RemedyItem *remedyItem;
 @property NSString *problemType;
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 
 @end

@@ -14,4 +14,6 @@
     @property NSArray * remedyList;
     @property IBOutlet UISearchBar *remedySearchBar;
 
+- (IBAction)unwindToRemedyList:(UIStoryboardSegue *)segue;
+
 @end

@@ -12,6 +12,7 @@
 #import "LogItem.h"
 #import "ContactInfoViewController.h"
 #import "CameraViewController.h"
+#import "AFNetworking.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f // bredden af description
@@ -31,6 +32,17 @@
 @implementation RemedyTableViewControllerExt
 
 @synthesize remedyItem;
+
+- (IBAction)save:(id)sender {
+   //  NSLog(@"save called");
+   // UIViewController *viewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"RemedyListID"];
+  //  UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:viewController];
+  //  [self.navigationController pushViewController:navi animated:YES];
+     NSString *segueName = @"showList";
+    [self performSegueWithIdentifier: segueName sender: self];
+}
+
+
 
 - (IBAction)unwindRemedy:(UIStoryboardSegue *)segue {
     NSLog(@"unwindToList metode in RemedyViewControllerExt");
@@ -103,14 +115,14 @@
     logArray = [[NSMutableArray alloc] init];
     // add some data to the array
     LogItem *logItem1 = [[LogItem alloc] init];
-    logItem1.username = @"Kasper O";
+    logItem1.username = @"Jens Jensen";
     logItem1.status = @"Created";
     logItem1.displayDateTime =@"5h";
     
     [logArray addObject:logItem1];
     
     LogItem *logItem2 = [[LogItem alloc] init];
-    logItem2.username = @"Jørgen Jørgsen";
+    logItem2.username = @"Jørgen Jørgensen";
     logItem2.status = @"Assigned";
     logItem2.displayDateTime =@"1d";
     
@@ -123,10 +135,10 @@
         remedyItem = [[RemedyItem alloc] init];
         remedyItem.id = nil;
         remedyItem.description = @"No description";
-        remedyItem.areaID = @" ";
-        remedyItem.machineID = @" ";
-        remedyItem.errorTypeID = @" ";
-        remedyItem.status = @" ";
+        remedyItem.areaID = [SelectItem createEmptySelectItem];
+        remedyItem.machineID = [SelectItem createEmptySelectItem];
+        remedyItem.errorTypeID = [SelectItem createEmptySelectItem];
+        remedyItem.status = [SelectItem createEmptySelectItem];
         // Navigation Title
         self.navigationItem.title=  @"Create";
     } else {
@@ -217,7 +229,7 @@
     }
     if(indexPath.section == 0) {
         cell.textLabel.text = @"Status";
-        cell.detailTextLabel.text= remedyItem.status;
+        cell.detailTextLabel.text= remedyItem.status.text;
 
     }
     
@@ -225,11 +237,11 @@
         cell.textLabel.text = [problems objectAtIndex:indexPath.row];
         // Area
         if (indexPath.row == 0) {
-            cell.detailTextLabel.text = remedyItem.areaID;
+            cell.detailTextLabel.text = remedyItem.areaID.text;
         } else if (indexPath.row == 1) {
-            cell.detailTextLabel.text = remedyItem.machineID;
+            cell.detailTextLabel.text = remedyItem.machineID.text;
         } else if (indexPath.row == 2) {
-            cell.detailTextLabel.text = remedyItem.errorTypeID;
+            cell.detailTextLabel.text = remedyItem.errorTypeID.text;
         }
         else {
             cell.detailTextLabel.text = @"buh";
@@ -454,6 +466,45 @@
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         LogItem *logItem = [logArray objectAtIndex:indexPath.row];
         dest.userId =logItem.userId;
+    }
+    else if ([segue.identifier isEqualToString:@"showMenu"]) {
+          NSLog(@"prepareForSegue showMenu");
+        if (sender == self.saveButton)  {
+            NSLog(@"save remedy...");
+            NSString *description = remedyItem.description;
+            NSInteger statusIdInt = [remedyItem.status.id intValue];
+            NSInteger areaIdInt = [remedyItem.areaID.id intValue];
+            NSInteger machineIdInt = [remedyItem.machineID.id intValue];
+            NSInteger errorTypeIdInt = [remedyItem.errorTypeID.id intValue];
+            NSNumber *statusId = [NSNumber numberWithInt:statusIdInt];
+            NSNumber *areaId = [NSNumber numberWithInt:areaIdInt];
+            NSNumber *machineId = [NSNumber numberWithInt:machineIdInt];
+            NSNumber *errorTypeId = [NSNumber numberWithInt:errorTypeIdInt];
+
+            
+            NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                      description, @"description",
+                                      statusId, @"statusId",
+                                      areaId, @"areaId",
+                                      machineId, @"machineId",
+                                      errorTypeId, @"errorTypeId",
+                                      nil];
+            NSLog(@"jsonDict: %@", jsonDict);
+            
+            
+          //  @"http://localhost:8080/RemedyAdminApp/remedyRest/save"
+            NSString *postUrl = @"http://localhost:8080/RemedyAdminApp/remedyRest/save";
+            
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            [manager POST:postUrl
+               parameters:jsonDict
+                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                      NSLog(@"JSON: %@", responseObject);
+                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                      NSLog(@"Error: %@", error);
+                  }];
+        }
+        
     }
 }
 

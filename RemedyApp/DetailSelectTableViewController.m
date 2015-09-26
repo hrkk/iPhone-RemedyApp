@@ -8,6 +8,10 @@
 
 #import "DetailSelectTableViewController.h"
 #import "RemedyTableViewController.h"
+#import "AFNetworking.h"
+#import "Utilities.h"
+#import "SelectItem.h"
+#import "Prefs.h"
 
 @interface DetailSelectTableViewController () {
     NSArray *detailList;
@@ -19,12 +23,17 @@
 
 @synthesize remedyItem;
 @synthesize problemType;
+@synthesize activityIndicatorView;
+
+
 
 - (void)viewDidLoad {
    [super viewDidLoad];
     
+    
    NSLog(@"problemType: %@", problemType);
    self.navigationItem.title = NSLocalizedString(problemType, nil);
+    /*
    if ([problemType isEqualToString:@"AREA"]) {
        detailList = [NSArray arrayWithObjects:@"Area 1", @"Area 2", @"Area 3",nil];
    } else if ([problemType isEqualToString:@"MACHINE"]) {
@@ -34,8 +43,73 @@
    } else if ([problemType isEqualToString:@"STATUS"]) {
        detailList = [NSArray arrayWithObjects:@"New", @"Open", @"New (re-assign)", @"Fixed", @"Closed",nil];
    }
+    */
     
+    // call web service manager
+    /*
+    AFHTTPRequestOperationManager *manager =[AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://localhost:8080/RemedyAdminApp/areaControllerRest/"
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             NSLog(@"JSON: %@", responseObject);
+             NSString *className = NSStringFromClass([responseObject class]);
+             detailList = [Utilities loadFromJson:responseObject];
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error);
+         }];
+     */
     
+    // Setting Up Activity Indicator View
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicatorView.hidesWhenStopped = YES;
+    self.activityIndicatorView.center = self.view.center;
+    [self.view addSubview:self.activityIndicatorView];
+    [self.activityIndicatorView startAnimating];
+
+    
+    // 1
+    NSString *serviceUrl = nil;
+    NSString *serverRoot = PREFS_SERVER_URL;
+    if ([problemType isEqualToString:@"AREA"]) {
+        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"areaControllerRest/"];
+    } else if ([problemType isEqualToString:@"MACHINE"]) {
+        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"machineRest/"];
+    } else if ([problemType isEqualToString:@"ERROR_TYPE"]) {
+        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyErrorRest/"];
+    } else if ([problemType isEqualToString:@"STATUS"]) {
+        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"statusRest/"];
+    }
+    
+    NSURL *url = [NSURL URLWithString:serviceUrl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // 3
+        NSLog(@"JSON: %@", responseObject);
+      
+        detailList = [Utilities loadFromJson:responseObject];
+        [self.activityIndicatorView stopAnimating];
+        [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Area's"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    [operation start];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -60,7 +134,9 @@
  UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"DetailTableCell" forIndexPath:indexPath];
  
  // Configure the cell...
- cell.textLabel.text = [detailList objectAtIndex:indexPath.row];
+     SelectItem *item  =[detailList objectAtIndex:indexPath.row];
+   //  NSString *string = [NSString stringWithFormat:@"%@", item.text];
+ cell.textLabel.text = item.text;
  
  return cell;
 }
@@ -112,17 +188,16 @@
         NSLog(@"prepareForSegue : %@s", segue.identifier);
         RemedyTableViewController *dest = segue.destinationViewController;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSString *id = [detailList objectAtIndex:indexPath.row];
+        SelectItem *item = [detailList objectAtIndex:indexPath.row];
 //        NSString *id = [NSString stringWithFormat:@"%ld",indexPath.row];
         if ([problemType isEqualToString:@"AREA"]) {
-            dest.remedyItem.areaID = id;
+            dest.remedyItem.areaID = item;
         } else if ([problemType isEqualToString:@"MACHINE"]) {
-            dest.remedyItem.machineID = id;
-        }
-        else if ([problemType isEqualToString:@"ERROR_TYPE"]) {
-            dest.remedyItem.errorTypeID = id;
+            dest.remedyItem.machineID = item;
+        } else if ([problemType isEqualToString:@"ERROR_TYPE"]) {
+            dest.remedyItem.errorTypeID = item;
         } else if ([problemType isEqualToString:@"STATUS"]) {
-            dest.remedyItem.status = id;
+            dest.remedyItem.status = item;
         }
     } else {
         RemedyTableViewController *dest = segue.destinationViewController;
