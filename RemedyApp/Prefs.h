@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define PREFS_SERVER_URL @"http://www.roninit.dk/RemedyAdminApp/"
+//#define PREFS_SERVER_URL @"http://www.roninit.dk/RemedyAdminApp/"
+#define PREFS_SERVER_URL @"http://localhost:8080/RemedyAdminApp/"
 
 @interface Prefs : NSObject
 

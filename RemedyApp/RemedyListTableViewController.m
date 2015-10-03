@@ -8,7 +8,10 @@
 
 #import "RemedyListTableViewController.h"
 #import "RemedyItem.h"
-#import "RemedyViewControllerExt.h"
+#import "RemedyTableViewControllerExt.h"
+#import "AFNetworking.h"
+#import "Prefs.h"
+#import "Utilities.h"
 
 @interface RemedyListTableViewController ()
 
@@ -45,7 +48,6 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Initialize table data
-    
     SelectItem *area1 = [SelectItem createSelectItem:@"areaID1" text:@"area1"];
     SelectItem *area2 = [SelectItem createSelectItem:@"areaID2" text:@"area2"];
     SelectItem *area3 = [SelectItem createSelectItem:@"areaID3" text:@"area3"];
@@ -61,7 +63,7 @@
     SelectItem *statusClosed = [SelectItem createSelectItem:@"statusID7" text:@"Closed"];
 
 
-    
+    /*
     remedyList = [NSArray arrayWithObjects:
                   [RemedyItem createRemedyListItem:@"1" description:@"machine1 is broken" areaID:area1 status:statusNew assignedTo:@""],
                   [RemedyItem createRemedyListItem:@"2" description:@"machine2 makes a noise and is not working" areaID:area1 status:statusNew assignedTo:@""],
@@ -73,9 +75,56 @@
                   [RemedyItem createRemedyListItem:@"8" description:@"Machine3 is running slow" areaID:area3 status:statusNotOk assignedTo:@"Kasper Odgaard"],
                   [RemedyItem createRemedyListItem:@"9" description:@"No more plastic in machine" areaID:area5 status:statusNoReproduce assignedTo:@"Kasper Odgaard"],
                   [RemedyItem createRemedyListItem:@"10" description:@"Wrong size" areaID:area5 status:statusClosed assignedTo:@"Kasper Odgaard"], nil];
+     
+     */
     
-    // Initialize the filteredCandyArray with a capacity equal to the candyArray's capacity
-    self.filteredRemedyList = [NSMutableArray arrayWithCapacity:[remedyList count]];
+  
+    
+    // Setting Up Activity Indicator View
+    /*
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicatorView.hidesWhenStopped = YES;
+    self.activityIndicatorView.center = self.view.center;
+    [self.view addSubview:self.activityIndicatorView];
+    [self.activityIndicatorView startAnimating];
+    */
+    
+    // 1
+    NSString *serviceUrl = nil;
+    NSString *serverRoot = PREFS_SERVER_URL;
+   serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/remedyList/"];
+//      serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"machineRest"];
+   
+    
+    NSURL *url = [NSURL URLWithString:serviceUrl];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    // 2
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    operation.responseSerializer = [AFJSONResponseSerializer serializer];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // 3
+        NSLog(@"JSON: %@", responseObject);
+        remedyList = [Utilities  loadRemedyListFromJson:responseObject];
+        // Initialize the filteredCandyArray with a capacity equal to the candyArray's capacity
+        self.filteredRemedyList = [NSMutableArray arrayWithCapacity:[remedyList count]];
+          [self.tableView reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        // 4
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Area's"
+                                                            message:[error localizedDescription]
+                                                           delegate:nil
+                                                  cancelButtonTitle:@"Ok"
+                                                  otherButtonTitles:nil];
+        [alertView show];
+    }];
+    
+    // 5
+    [operation start];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -234,16 +283,15 @@
          NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
          NSLog(@"prepareForSegue  %@ indexPath: %ld section; %ld", segue.identifier, (long)indexPath.row, (long)indexPath.section);
          UINavigationController *navigationController = segue.destinationViewController;
-         RemedyViewControllerExt *dest = (RemedyViewControllerExt * )navigationController;
+         RemedyTableViewControllerExt *dest = (RemedyTableViewControllerExt * )navigationController;
          RemedyItem *remedyItem;
-          if(sender == self.searchDisplayController.searchResultsTableView) {
+         if(sender == self.searchDisplayController.searchResultsTableView) {
              remedyItem = [filteredRemedyList objectAtIndex:indexPath.row];
          } else {
              remedyItem = [remedyList objectAtIndex:indexPath.row];
          }
          dest.remedyItem = remedyItem;
      }
-
  }
 
 

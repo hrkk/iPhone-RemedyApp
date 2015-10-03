@@ -12,4 +12,6 @@
 
 +(NSMutableArray*) loadFromJson:(NSArray*)allSelectItems;
 
++(NSMutableArray*) loadRemedyListFromJson:(NSArray*)allRemedys;
+
 @end

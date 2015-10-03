@@ -26,5 +26,9 @@
 @property SelectItem *status;
 @property NSString *assignedTo;
 
+// Constructor
+- (id) initWithDictionary:(NSDictionary *) dict;
+- (id) initWithDictionary2:(NSDictionary *) dict;
+
 + (id)createRemedyListItem:(NSString*)id description:(NSString*)description areaID:(SelectItem*)areaID status:(SelectItem*)status assignedTo:(NSString*)assignedTo;
 @end

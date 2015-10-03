@@ -23,6 +23,11 @@
     UIImage *myResizedImage = [self imageWithImage:orgImg
                                   scaledToMaxWidth:500
                                          maxHeight:500];
+    NSData *imageData = UIImageJPEGRepresentation(myResizedImage, 0);
+    
+    //    NSData *imgData = UIImageJPEGRepresentation(remedyItem.image, 0);
+    NSLog(@"Size of Image(bytes):%lu",(unsigned long)[imageData length]);
+
     
     _imageView.image = myResizedImage;
     
@@ -156,6 +161,13 @@ finishedSavingWithError:(NSError *)error
  // Get the new view controller using [segue destinationViewController].
  // Pass the selected object to the new view controller.
      RemedyTableViewController *dest = segue.destinationViewController;
-     _selectImage =_imageView.image;
+     
+     // lets resize
+     
+     UIImage *myResizedImage = [self imageWithImage:_imageView.image
+                                   scaledToMaxWidth:500
+                                          maxHeight:500];
+
+     _selectImage =myResizedImage;
  }
 @end

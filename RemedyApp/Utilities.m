@@ -8,6 +8,7 @@
 
 #import "Utilities.h"
 #import "SelectItem.h"
+#import "RemedyItem.h"
 
 @implementation Utilities 
 
@@ -19,6 +20,17 @@
         [array addObject:item];
     }
     return array;
+}
+
++(NSMutableArray*) loadRemedyListFromJson:(NSArray*)allRemedys {
+     NSMutableArray *array = [[NSMutableArray alloc] init];
+    for(NSDictionary *JSONRemedy in allRemedys) {
+        RemedyItem *item = [[RemedyItem alloc] initWithDictionary:JSONRemedy];
+        [array addObject:item];
+    }
+    
+     return array;
+    
 }
 
 @end

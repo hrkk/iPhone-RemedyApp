@@ -13,6 +13,7 @@
 #import "ContactInfoViewController.h"
 #import "CameraViewController.h"
 #import "AFNetworking.h"
+#import "Prefs.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f // bredden af description
@@ -143,7 +144,13 @@
         self.navigationItem.title=  @"Create";
     } else {
         NSString *title = [NSString stringWithFormat:@"#%@", remedyItem.id];
-        self.navigationItem.title=  title;
+        self.navigationItem.title =  title;
+                  NSString *serviceUrl = nil;
+            NSString *serverRoot = PREFS_SERVER_URL;
+            serviceUrl = [NSString stringWithFormat:@"%@%@%@", serverRoot, @"remedy/showImage/", remedyItem.id];
+            NSURL *url = [NSURL URLWithString:serviceUrl];
+            NSData *data = [NSData dataWithContentsOfURL:url];
+            remedyItem.image = [UIImage imageWithData:data];
     }
 }
 
@@ -480,6 +487,28 @@
             NSNumber *areaId = [NSNumber numberWithInt:areaIdInt];
             NSNumber *machineId = [NSNumber numberWithInt:machineIdInt];
             NSNumber *errorTypeId = [NSNumber numberWithInt:errorTypeIdInt];
+            
+            
+             NSString *byteArray = [UIImagePNGRepresentation( remedyItem.image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+            
+            // get hardcoded image
+            NSData *imageData = UIImageJPEGRepresentation(remedyItem.image, 0);
+            
+        //    NSData *imgData = UIImageJPEGRepresentation(remedyItem.image, 0);
+            NSLog(@"Size of Image(bytes):%lu",(unsigned long)[imageData length]);
+            
+         //   NSLog(@"%@", byteArray);
+            /*
+             
+             You can convert the UIImage to a NSData object and then extract the byte array from there. Here is some sample code:
+             
+             UIImage *image = [UIImage imageNamed:@"image.png"];
+             NSString *byteArray = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+             If you are using a PNG Image you can use the UIImagePNGRepresentation function as shown above or if you are using a JPEG Image, you can use the UIImageJPEGRepresentation function. Documentation is available on the UIImage Class Reference
+             
+             */
+            
+           
 
             
             NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
@@ -495,14 +524,34 @@
           //  @"http://localhost:8080/RemedyAdminApp/remedyRest/save"
             NSString *postUrl = @"http://localhost:8080/RemedyAdminApp/remedyRest/save";
             
+            
+            
+            
+        //    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+         //   NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+            
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            [manager POST:postUrl
-               parameters:jsonDict
+        
+            [manager POST:postUrl parameters:jsonDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                [formData appendPartWithFileData:imageData name:@"photo" fileName:@"head.jpg" mimeType:@"jpg"];
+            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                NSLog(@"Success: %@", responseObject);
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                NSLog(@"Error: %@", error);
+            }];
+            
+            
+            /*
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            [manager POST:postUrl parameters:jsonDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+                [formData appendPartWithFormData:imageData photo:@"imageData"];
+                }
                   success:^(AFHTTPRequestOperation *operation, id responseObject) {
                       NSLog(@"JSON: %@", responseObject);
                   } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                       NSLog(@"Error: %@", error);
                   }];
+             */
         }
         
     }
