@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A7269E801BC064E2000D31DD /* RemedyLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A7269E7F1BC064E2000D31DD /* RemedyLog.m */; settings = {ASSET_TAGS = (); }; };
 		A73C52A51B27761E004A27E6 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52A41B27761E004A27E6 /* ComposeViewController.m */; };
 		A73C52AB1B28329F004A27E6 /* RemedyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52AA1B28329F004A27E6 /* RemedyTableViewController.m */; };
 		A73C52AE1B28D5A0004A27E6 /* RemedyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52AD1B28D5A0004A27E6 /* RemedyItem.m */; };
@@ -52,6 +53,7 @@
 		A7CF22651B150009007EF1E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CF22631B150009007EF1E7 /* LaunchScreen.xib */; };
 		A7CF22711B150009007EF1E7 /* RemedyAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22701B150009007EF1E7 /* RemedyAppTests.m */; };
 		A7CF227B1B150396007EF1E7 /* creme_brelee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A7CF227A1B150396007EF1E7 /* creme_brelee.jpg */; };
+		A7E43FDD1BC440CF00539F79 /* AppDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E43FDC1BC440CF00539F79 /* AppDataCache.m */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		A7269E7E1BC064E2000D31DD /* RemedyLog.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyLog.h; sourceTree = "<group>"; };
+		A7269E7F1BC064E2000D31DD /* RemedyLog.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RemedyLog.m; sourceTree = "<group>"; };
 		A73C52A31B27761E004A27E6 /* ComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		A73C52A41B27761E004A27E6 /* ComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		A73C52A91B28329F004A27E6 /* RemedyTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RemedyTableViewController.h; sourceTree = "<group>"; };
@@ -153,6 +157,8 @@
 		A7CF226F1B150009007EF1E7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A7CF22701B150009007EF1E7 /* RemedyAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RemedyAppTests.m; sourceTree = "<group>"; };
 		A7CF227A1B150396007EF1E7 /* creme_brelee.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = creme_brelee.jpg; sourceTree = "<group>"; };
+		A7E43FDB1BC440CF00539F79 /* AppDataCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDataCache.h; sourceTree = "<group>"; };
+		A7E43FDC1BC440CF00539F79 /* AppDataCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDataCache.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -269,6 +275,8 @@
 				A73C52A41B27761E004A27E6 /* ComposeViewController.m */,
 				A73C52AC1B28D59F004A27E6 /* RemedyItem.h */,
 				A73C52AD1B28D5A0004A27E6 /* RemedyItem.m */,
+				A7269E7E1BC064E2000D31DD /* RemedyLog.h */,
+				A7269E7F1BC064E2000D31DD /* RemedyLog.m */,
 				A73C52A91B28329F004A27E6 /* RemedyTableViewController.h */,
 				A73C52AA1B28329F004A27E6 /* RemedyTableViewController.m */,
 				A73C52AF1B2F0051004A27E6 /* DetailSelectTableViewController.h */,
@@ -283,6 +291,8 @@
 				A7CA12F01B4B0AD00081BC55 /* RemedyListTableViewController.m */,
 				A7CA132A1B4DC0930081BC55 /* RemedyTableViewControllerExt.h */,
 				A7CA132B1B4DC0930081BC55 /* RemedyTableViewControllerExt.m */,
+				A7E43FDB1BC440CF00539F79 /* AppDataCache.h */,
+				A7E43FDC1BC440CF00539F79 /* AppDataCache.m */,
 				A7CA13F91B524A550081BC55 /* SettingsViewController.h */,
 				A7CA13FA1B524A550081BC55 /* SettingsViewController.m */,
 				A7CA13FF1B544D5A0081BC55 /* MenuViewController.h */,
@@ -443,9 +453,11 @@
 				A771E8441B41BDDD0018E94C /* ContactInfoViewController.m in Sources */,
 				A7CD7D001B88344000580C61 /* UIProgressView+AFNetworking.m in Sources */,
 				A7CA132C1B4DC0930081BC55 /* RemedyTableViewControllerExt.m in Sources */,
+				A7E43FDD1BC440CF00539F79 /* AppDataCache.m in Sources */,
 				A7CD7CFB1B88344000580C61 /* AFNetworkActivityIndicatorManager.m in Sources */,
 				A7CA12F11B4B0AD00081BC55 /* RemedyListTableViewController.m in Sources */,
 				A7CD7D021B88344000580C61 /* UIWebView+AFNetworking.m in Sources */,
+				A7269E801BC064E2000D31DD /* RemedyLog.m in Sources */,
 				A7CD7CE21B88342C00580C61 /* AFHTTPSessionManager.m in Sources */,
 				A7CA13FB1B524A550081BC55 /* SettingsViewController.m in Sources */,
 				A771E83E1B37E03A0018E94C /* CustomImageCell.m in Sources */,

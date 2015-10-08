@@ -10,10 +10,12 @@
 #import "DetailSelectTableViewController.h"
 #import "ComposeViewController.h"
 #import "LogItem.h"
+#import "RemedyLog.h"
 #import "ContactInfoViewController.h"
 #import "CameraViewController.h"
 #import "AFNetworking.h"
 #import "Prefs.h"
+#import "AppDataCache.h"
 
 #define FONT_SIZE 14.0f
 #define CELL_CONTENT_WIDTH 320.0f // bredden af description
@@ -26,6 +28,7 @@
     NSArray *logs;
     
     NSMutableArray *logArray;
+    BOOL isNewRemedy;
 }
 
 @end
@@ -110,9 +113,6 @@
     logs = [NSArray arrayWithObjects:@"Created", @"Assign to XXX", @"Reassignment", nil];
     
     
-    
-    
-    
     logArray = [[NSMutableArray alloc] init];
     // add some data to the array
     LogItem *logItem1 = [[LogItem alloc] init];
@@ -129,28 +129,30 @@
     
     [logArray addObject:logItem2];
     
-    
-    
     // create empty remedyItem
     if(remedyItem==nil) {
+        isNewRemedy = YES;
         remedyItem = [[RemedyItem alloc] init];
         remedyItem.id = nil;
         remedyItem.description = @"No description";
         remedyItem.areaID = [SelectItem createEmptySelectItem];
         remedyItem.machineID = [SelectItem createEmptySelectItem];
         remedyItem.errorTypeID = [SelectItem createEmptySelectItem];
-        remedyItem.status = [SelectItem createEmptySelectItem];
+        NSArray *statusList = [AppDataCache shared].statusList;
+      
+        remedyItem.status = statusList[0]; //[SelectItem createEmptySelectItem];
         // Navigation Title
         self.navigationItem.title=  @"Create";
     } else {
+        isNewRemedy = NO;
         NSString *title = [NSString stringWithFormat:@"#%@", remedyItem.id];
         self.navigationItem.title =  title;
-                  NSString *serviceUrl = nil;
-            NSString *serverRoot = PREFS_SERVER_URL;
-            serviceUrl = [NSString stringWithFormat:@"%@%@%@", serverRoot, @"remedy/showImage/", remedyItem.id];
-            NSURL *url = [NSURL URLWithString:serviceUrl];
-            NSData *data = [NSData dataWithContentsOfURL:url];
-            remedyItem.image = [UIImage imageWithData:data];
+        NSString *serviceUrl = nil;
+        NSString *serverRoot = PREFS_SERVER_URL;
+        serviceUrl = [NSString stringWithFormat:@"%@%@%@", serverRoot, @"remedy/showImage/", remedyItem.id];
+        NSURL *url = [NSURL URLWithString:serviceUrl];
+        NSData *data = [NSData dataWithContentsOfURL:url];
+        remedyItem.image = [UIImage imageWithData:data];
     }
 }
 
@@ -169,8 +171,8 @@
         return 1;
     } else  if(section == 3){
         return 1;
-    } else if(section == 4) {
-        return [logArray count];
+    } else if(section == 4 && !isNewRemedy) {
+        return [remedyItem.logs count];
     } else if(section == 5) {
     }
     
@@ -181,7 +183,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 5;
+    if(isNewRemedy)
+        return 4;
+    else
+        return 5;
     
 }
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:   (NSInteger)section
@@ -194,7 +199,7 @@
         return @"Short description";
     } else if(section == 3) {
         return @"Picture";
-    } else if(section == 4) {
+    } else if(section == 4 && !isNewRemedy) {
         return @"Log";
     } else {
         return @"Log";
@@ -338,10 +343,10 @@
         return cell;
     }  else if(indexPath.section == 4) {
         UITableViewCell *logCell = [tableView dequeueReusableCellWithIdentifier:logCellTableIdentifier];
-        LogItem *logItem = [logArray objectAtIndex:indexPath.row];
-        logCell.textLabel.text = logItem.username;
+        RemedyLog *logItem = [remedyItem.logs objectAtIndex:indexPath.row];
+        logCell.textLabel.text = logItem.statusChangeByName;
         NSString *detailTextLabel = [NSString stringWithFormat:@"%@ - %@", logItem.status,
-                                     logItem.displayDateTime];
+                                     logItem.lastUpdated];
         logCell.detailTextLabel.text = detailTextLabel;
         cell = logCell;
     } else if(indexPath.section == 5) {
@@ -479,10 +484,13 @@
         if (sender == self.saveButton)  {
             NSLog(@"save remedy...");
             NSString *description = remedyItem.description;
+            NSInteger idInt = [remedyItem.id intValue];
+
             NSInteger statusIdInt = [remedyItem.status.id intValue];
             NSInteger areaIdInt = [remedyItem.areaID.id intValue];
             NSInteger machineIdInt = [remedyItem.machineID.id intValue];
             NSInteger errorTypeIdInt = [remedyItem.errorTypeID.id intValue];
+            NSNumber *remedyId = [NSNumber numberWithInt:idInt];
             NSNumber *statusId = [NSNumber numberWithInt:statusIdInt];
             NSNumber *areaId = [NSNumber numberWithInt:areaIdInt];
             NSNumber *machineId = [NSNumber numberWithInt:machineIdInt];
@@ -495,7 +503,8 @@
             NSData *imageData = UIImageJPEGRepresentation(remedyItem.image, 0);
             
         //    NSData *imgData = UIImageJPEGRepresentation(remedyItem.image, 0);
-            NSLog(@"Size of Image(bytes):%lu",(unsigned long)[imageData length]);
+           long imageBytes = (unsigned long)[imageData length];
+            NSLog(@"Size of Image(bytes):%lu",imageBytes);
             
          //   NSLog(@"%@", byteArray);
             /*
@@ -512,18 +521,26 @@
 
             
             NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                                      remedyId, @"id",
                                       description, @"description",
                                       statusId, @"statusId",
                                       areaId, @"areaId",
                                       machineId, @"machineId",
                                       errorTypeId, @"errorTypeId",
                                       nil];
+            
+            
+          
             NSLog(@"jsonDict: %@", jsonDict);
             
             
           //  @"http://localhost:8080/RemedyAdminApp/remedyRest/save"
-            NSString *postUrl = @"http://localhost:8080/RemedyAdminApp/remedyRest/save";
+          //  NSString *postUrl = @"http://localhost:8080/RemedyAdminApp/remedyRest/save";
             
+            NSString *postUrl = nil;
+            NSString *serverRoot = PREFS_SERVER_URL;
+           
+
             
             
             
@@ -531,8 +548,13 @@
          //   NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
             
             AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        
-            [manager POST:postUrl parameters:jsonDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            
+            if(imageBytes >0) {
+                if(isNewRemedy)
+                    postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/save"];
+                else
+                    postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/update"];
+                [manager POST:postUrl parameters:jsonDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
                 [formData appendPartWithFileData:imageData name:@"photo" fileName:@"head.jpg" mimeType:@"jpg"];
             } success:^(AFHTTPRequestOperation *operation, id responseObject) {
                 NSLog(@"Success: %@", responseObject);
@@ -540,20 +562,26 @@
                 NSLog(@"Error: %@", error);
             }];
             
-            
-            /*
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            [manager POST:postUrl parameters:jsonDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                [formData appendPartWithFormData:imageData photo:@"imageData"];
-                }
-                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                      NSLog(@"JSON: %@", responseObject);
-                  } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                      NSLog(@"Error: %@", error);
-                  }];
-             */
+            } else if(imageBytes == 0){
+                if(isNewRemedy)
+                    postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/saveNoImage"];
+                else
+                     postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/updateNoImage"];
+                [manager POST:postUrl parameters:jsonDict
+                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                          NSLog(@"JSON: %@", responseObject);
+                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                          NSLog(@"Error: %@", error);
+                          // 4
+                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Saving data on server'"
+                                                                              message:[error localizedDescription]
+                                                                             delegate:nil
+                                                                    cancelButtonTitle:@"Ok"
+                                                                    otherButtonTitles:nil];
+                          [alertView show];
+                      }];
+            } 
         }
-        
     }
 }
 

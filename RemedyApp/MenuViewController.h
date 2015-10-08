@@ -10,6 +10,8 @@
 
 @interface MenuViewController : UIViewController
 
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
+
 - (IBAction)unwindMenu:(UIStoryboardSegue *)segue;
 
 @end

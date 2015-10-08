@@ -33,4 +33,8 @@
     return newSelectItem;
 }
 
+/* Overriding description (equivalent to toString in JAVA) */
+- (NSString*)description {
+    return [NSString stringWithFormat:@"<SelectItem> id : %@, text : %@", id, text];
+}
 @end

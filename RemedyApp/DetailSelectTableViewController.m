@@ -12,6 +12,7 @@
 #import "Utilities.h"
 #import "SelectItem.h"
 #import "Prefs.h"
+#import "AppDataCache.h"
 
 @interface DetailSelectTableViewController () {
     NSArray *detailList;
@@ -33,83 +34,16 @@
     
    NSLog(@"problemType: %@", problemType);
    self.navigationItem.title = NSLocalizedString(problemType, nil);
-    /*
-   if ([problemType isEqualToString:@"AREA"]) {
-       detailList = [NSArray arrayWithObjects:@"Area 1", @"Area 2", @"Area 3",nil];
-   } else if ([problemType isEqualToString:@"MACHINE"]) {
-       detailList = [NSArray arrayWithObjects:@"Machine 1", @"Machine 2", @"Machine 3",nil];
-   } else if ([problemType isEqualToString:@"ERROR_TYPE"]) {
-       detailList = [NSArray arrayWithObjects:@"Fatal", @"Cricical", @"Nice to have",nil];
-   } else if ([problemType isEqualToString:@"STATUS"]) {
-       detailList = [NSArray arrayWithObjects:@"New", @"Open", @"New (re-assign)", @"Fixed", @"Closed",nil];
-   }
-    */
-    
-    // call web service manager
-    /*
-    AFHTTPRequestOperationManager *manager =[AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://localhost:8080/RemedyAdminApp/areaControllerRest/"
-      parameters:nil
-         success:^(AFHTTPRequestOperation *operation, id responseObject) {
-             NSLog(@"JSON: %@", responseObject);
-             NSString *className = NSStringFromClass([responseObject class]);
-             detailList = [Utilities loadFromJson:responseObject];
-             
-         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-             NSLog(@"Error: %@", error);
-         }];
-     */
-    
-    // Setting Up Activity Indicator View
-    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    self.activityIndicatorView.hidesWhenStopped = YES;
-    self.activityIndicatorView.center = self.view.center;
-    [self.view addSubview:self.activityIndicatorView];
-    [self.activityIndicatorView startAnimating];
 
-    
-    // 1
-    NSString *serviceUrl = nil;
-    NSString *serverRoot = PREFS_SERVER_URL;
-    if ([problemType isEqualToString:@"AREA"]) {
-        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"areaControllerRest/"];
-    } else if ([problemType isEqualToString:@"MACHINE"]) {
-        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"machineRest/"];
-    } else if ([problemType isEqualToString:@"ERROR_TYPE"]) {
-        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyErrorRest/"];
-    } else if ([problemType isEqualToString:@"STATUS"]) {
-        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"statusRest/"];
-    }
-    
-    NSURL *url = [NSURL URLWithString:serviceUrl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    // 2
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        // 3
-        NSLog(@"JSON: %@", responseObject);
-      
-        detailList = [Utilities loadFromJson:responseObject];
-        [self.activityIndicatorView stopAnimating];
-        [self.tableView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        // 4
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Area's"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }];
-    
-    // 5
-    [operation start];
+   if ([problemType isEqualToString:@"AREA"]) {
+        detailList = [AppDataCache shared].areaList;
+   } else if ([problemType isEqualToString:@"MACHINE"]) {
+       detailList = [AppDataCache shared].machineList;
+   } else if ([problemType isEqualToString:@"ERROR_TYPE"]) {
+       detailList = [AppDataCache shared].errorTypeList;
+   } else if ([problemType isEqualToString:@"STATUS"]) {
+       detailList =[AppDataCache shared].statusList;
+   }
 }
 
 - (void)didReceiveMemoryWarning {
