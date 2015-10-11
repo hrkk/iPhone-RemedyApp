@@ -38,15 +38,136 @@
 @synthesize remedyItem;
 
 - (IBAction)save:(id)sender {
-   //  NSLog(@"save called");
+     NSLog(@"save called");
    // UIViewController *viewController = [[self storyboard] instantiateViewControllerWithIdentifier:@"RemedyListID"];
   //  UINavigationController *navi = [[UINavigationController alloc] initWithRootViewController:viewController];
   //  [self.navigationController pushViewController:navi animated:YES];
-     NSString *segueName = @"showList";
-    [self performSegueWithIdentifier: segueName sender: self];
 }
 
 
+
+- (IBAction)saveButtonAction:(id)sender {
+    NSString *description = remedyItem.description;
+    NSInteger idInt = [remedyItem.id intValue];
+    
+    NSInteger statusIdInt = [remedyItem.status.id intValue];
+    NSInteger areaIdInt = [remedyItem.areaID.id intValue];
+    NSInteger machineIdInt = [remedyItem.machineID.id intValue];
+    NSInteger errorTypeIdInt = [remedyItem.errorTypeID.id intValue];
+    NSNumber *remedyId = [NSNumber numberWithInt:idInt];
+    NSNumber *statusId = [NSNumber numberWithInt:statusIdInt];
+    NSNumber *areaId = [NSNumber numberWithInt:areaIdInt];
+    NSNumber *machineId = [NSNumber numberWithInt:machineIdInt];
+    NSNumber *errorTypeId = [NSNumber numberWithInt:errorTypeIdInt];
+    
+    
+    NSString *byteArray = [UIImagePNGRepresentation( remedyItem.image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+    
+    // get hardcoded image
+    NSData *imageData = UIImageJPEGRepresentation(remedyItem.image, 0);
+    
+    //    NSData *imgData = UIImageJPEGRepresentation(remedyItem.image, 0);
+    long imageBytes = (unsigned long)[imageData length];
+    NSLog(@"Size of Image(bytes):%lu",imageBytes);
+    
+    //   NSLog(@"%@", byteArray);
+    /*
+     
+     You can convert the UIImage to a NSData object and then extract the byte array from there. Here is some sample code:
+     
+     UIImage *image = [UIImage imageNamed:@"image.png"];
+     NSString *byteArray = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
+     If you are using a PNG Image you can use the UIImagePNGRepresentation function as shown above or if you are using a JPEG Image, you can use the UIImageJPEGRepresentation function. Documentation is available on the UIImage Class Reference
+     
+     */
+    
+    
+    
+    
+    NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                              remedyId, @"id",
+                              description, @"description",
+                              statusId, @"statusId",
+                              areaId, @"areaId",
+                              machineId, @"machineId",
+                              errorTypeId, @"errorTypeId",
+                              nil];
+    
+    
+    // Setting Up Activity Indicator View
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicatorView.hidesWhenStopped = YES;
+    self.activityIndicatorView.center = self.view.center;
+    [self.view addSubview:self.activityIndicatorView];
+    [self.activityIndicatorView startAnimating];
+
+    
+    
+    NSLog(@"jsonDict: %@", jsonDict);
+    
+    
+    //  @"http://localhost:8080/RemedyAdminApp/remedyRest/save"
+    //  NSString *postUrl = @"http://localhost:8080/RemedyAdminApp/remedyRest/save";
+    
+    NSString *postUrl = nil;
+    NSString *serverRoot = PREFS_SERVER_URL;
+    
+    
+    
+    
+    
+    //    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
+    //   NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    
+    if(imageBytes >0) {
+        if(isNewRemedy)
+            postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/save"];
+        else
+            postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/update"];
+        [manager POST:postUrl parameters:jsonDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+            [formData appendPartWithFileData:imageData name:@"photo" fileName:@"head.jpg" mimeType:@"jpg"];
+        } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+            NSLog(@"Success: %@", responseObject);
+             [self.activityIndicatorView stopAnimating];
+            NSString *segueName = @"showList";
+            [self performSegueWithIdentifier: segueName sender: self];
+
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            NSLog(@"Error: %@", error);
+             [self.activityIndicatorView stopAnimating];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Saving data on server'"
+                                                                message:[error localizedDescription]
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"Ok"
+                                                      otherButtonTitles:nil];
+            [alertView show];
+        }];
+        
+    } else if(imageBytes == 0){
+        if(isNewRemedy)
+            postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/saveNoImage"];
+        else
+            postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/updateNoImage"];
+        [manager POST:postUrl parameters:jsonDict
+              success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                  NSLog(@"JSON: %@", responseObject);
+                   [self.activityIndicatorView stopAnimating];
+                  NSString *segueName = @"showList";
+                  [self performSegueWithIdentifier: segueName sender: self];
+              } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Error: %@", error);
+                   [self.activityIndicatorView stopAnimating];
+                  UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Saving data on server'"
+                                                                      message:[error localizedDescription]
+                                                                     delegate:nil
+                                                            cancelButtonTitle:@"Ok"
+                                                            otherButtonTitles:nil];
+                  [alertView show];
+              }];
+    }
+}
 
 - (IBAction)unwindRemedy:(UIStoryboardSegue *)segue {
     NSLog(@"unwindToList metode in RemedyViewControllerExt");
@@ -481,107 +602,6 @@
     }
     else if ([segue.identifier isEqualToString:@"showMenu"]) {
           NSLog(@"prepareForSegue showMenu");
-        if (sender == self.saveButton)  {
-            NSLog(@"save remedy...");
-            NSString *description = remedyItem.description;
-            NSInteger idInt = [remedyItem.id intValue];
-
-            NSInteger statusIdInt = [remedyItem.status.id intValue];
-            NSInteger areaIdInt = [remedyItem.areaID.id intValue];
-            NSInteger machineIdInt = [remedyItem.machineID.id intValue];
-            NSInteger errorTypeIdInt = [remedyItem.errorTypeID.id intValue];
-            NSNumber *remedyId = [NSNumber numberWithInt:idInt];
-            NSNumber *statusId = [NSNumber numberWithInt:statusIdInt];
-            NSNumber *areaId = [NSNumber numberWithInt:areaIdInt];
-            NSNumber *machineId = [NSNumber numberWithInt:machineIdInt];
-            NSNumber *errorTypeId = [NSNumber numberWithInt:errorTypeIdInt];
-            
-            
-             NSString *byteArray = [UIImagePNGRepresentation( remedyItem.image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-            
-            // get hardcoded image
-            NSData *imageData = UIImageJPEGRepresentation(remedyItem.image, 0);
-            
-        //    NSData *imgData = UIImageJPEGRepresentation(remedyItem.image, 0);
-           long imageBytes = (unsigned long)[imageData length];
-            NSLog(@"Size of Image(bytes):%lu",imageBytes);
-            
-         //   NSLog(@"%@", byteArray);
-            /*
-             
-             You can convert the UIImage to a NSData object and then extract the byte array from there. Here is some sample code:
-             
-             UIImage *image = [UIImage imageNamed:@"image.png"];
-             NSString *byteArray = [UIImagePNGRepresentation(image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
-             If you are using a PNG Image you can use the UIImagePNGRepresentation function as shown above or if you are using a JPEG Image, you can use the UIImageJPEGRepresentation function. Documentation is available on the UIImage Class Reference
-             
-             */
-            
-           
-
-            
-            NSDictionary *jsonDict = [[NSDictionary alloc] initWithObjectsAndKeys:
-                                      remedyId, @"id",
-                                      description, @"description",
-                                      statusId, @"statusId",
-                                      areaId, @"areaId",
-                                      machineId, @"machineId",
-                                      errorTypeId, @"errorTypeId",
-                                      nil];
-            
-            
-          
-            NSLog(@"jsonDict: %@", jsonDict);
-            
-            
-          //  @"http://localhost:8080/RemedyAdminApp/remedyRest/save"
-          //  NSString *postUrl = @"http://localhost:8080/RemedyAdminApp/remedyRest/save";
-            
-            NSString *postUrl = nil;
-            NSString *serverRoot = PREFS_SERVER_URL;
-           
-
-            
-            
-            
-        //    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-         //   NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
-            
-            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-            
-            if(imageBytes >0) {
-                if(isNewRemedy)
-                    postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/save"];
-                else
-                    postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/update"];
-                [manager POST:postUrl parameters:jsonDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
-                [formData appendPartWithFileData:imageData name:@"photo" fileName:@"head.jpg" mimeType:@"jpg"];
-            } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                NSLog(@"Success: %@", responseObject);
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                NSLog(@"Error: %@", error);
-            }];
-            
-            } else if(imageBytes == 0){
-                if(isNewRemedy)
-                    postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/saveNoImage"];
-                else
-                     postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/updateNoImage"];
-                [manager POST:postUrl parameters:jsonDict
-                      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-                          NSLog(@"JSON: %@", responseObject);
-                      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                          NSLog(@"Error: %@", error);
-                          // 4
-                          UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Saving data on server'"
-                                                                              message:[error localizedDescription]
-                                                                             delegate:nil
-                                                                    cancelButtonTitle:@"Ok"
-                                                                    otherButtonTitles:nil];
-                          [alertView show];
-                      }];
-            } 
-        }
     }
 }
 

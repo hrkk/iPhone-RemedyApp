@@ -15,6 +15,7 @@
 @property (nonatomic,strong) NSArray *machineList;
 @property (nonatomic,strong) NSArray *errorTypeList;
 @property (nonatomic, assign) BOOL reload;
+@property NSString *authorization;
 
 + (AppDataCache *)shared;
 

@@ -42,15 +42,10 @@
     [self.view addSubview:self.activityIndicatorView];
     [self.activityIndicatorView startAnimating];
     
-    
-    
-    
-    
     for (int i = 1; i <= 4; i++)
     {
         NSString *serviceUrl = nil;
         NSString *serverRoot = PREFS_SERVER_URL;
-        serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"statusRest/"];
         
         if (i==1) {
             serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"areaControllerRest/"];
@@ -61,52 +56,44 @@
         } else if (i==4) {
             serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"statusRest/"];
         }
-
-
-    
-        NSURL *url = [[NSURL alloc] initWithString:serviceUrl];
-        NSURLRequest *request = [[NSURLRequest alloc] initWithURL:url];
-    
-        // 2
-        AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-        operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-        [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
-            // 3
-            NSLog(@"JSON: %@", responseObject);
-            if(i==1) {
-                [AppDataCache shared].areaList = [Utilities loadFromJson:responseObject];
-                NSLog(@"%@",[AppDataCache shared].areaList);
-            }
-            else if(i==2) {
-                [AppDataCache shared].machineList = [Utilities loadFromJson:responseObject];
-                NSLog(@"%@",[AppDataCache shared].machineList);
-            }
-            else if(i==3) {
-                [AppDataCache shared].errorTypeList = [Utilities loadFromJson:responseObject];
-                NSLog(@"%@",[AppDataCache shared].errorTypeList);
-            }
-            else if(i==4) {
-                [AppDataCache shared].statusList = [Utilities loadFromJson:responseObject];
-                NSLog(@"%@",[AppDataCache shared].statusList);
-                [self.activityIndicatorView stopAnimating];
-            }
-        
-        
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-            // 4
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Server data'"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-            [alertView show];
-        }];
-    
-        // 5
-        [operation start];
+        NSString *authValue = [AppDataCache shared].authorization;
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        manager.requestSerializer = [AFJSONRequestSerializer serializer];
+        [manager.requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];
+        [manager GET:serviceUrl
+          parameters:nil
+             success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                 [self.activityIndicatorView stopAnimating];
+                 NSLog(@"JSON: %@", responseObject);
+                 if(i==1) {
+                     [AppDataCache shared].areaList = [Utilities loadFromJson:responseObject];
+                     NSLog(@"%@",[AppDataCache shared].areaList);
+                 }
+                 else if(i==2) {
+                     [AppDataCache shared].machineList = [Utilities loadFromJson:responseObject];
+                     NSLog(@"%@",[AppDataCache shared].machineList);
+                 }
+                 else if(i==3) {
+                     [AppDataCache shared].errorTypeList = [Utilities loadFromJson:responseObject];
+                     NSLog(@"%@",[AppDataCache shared].errorTypeList);
+                 }
+                 else if(i==4) {
+                     [AppDataCache shared].statusList = [Utilities loadFromJson:responseObject];
+                     NSLog(@"%@",[AppDataCache shared].statusList);
+                     [self.activityIndicatorView stopAnimating];
+                 }
+                
+             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                 NSLog(@"Error: %@", error);
+                 [self.activityIndicatorView stopAnimating];
+                 UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Server data"
+                                                                     message:[error localizedDescription]
+                                                                    delegate:nil
+                                                           cancelButtonTitle:@"Ok"
+                                                           otherButtonTitles:nil];
+                 [alertView show];
+             }];
     }
 
 }

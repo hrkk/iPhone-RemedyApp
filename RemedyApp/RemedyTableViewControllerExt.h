@@ -13,8 +13,11 @@
 - (IBAction)save:(id)sender;
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *saveButton;
+- (IBAction)saveButtonAction:(id)sender;
 
 - (IBAction)unwindRemedy:(UIStoryboardSegue *)segue;
+
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 
 @property RemedyItem *remedyItem;
 

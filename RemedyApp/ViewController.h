@@ -11,6 +11,11 @@
 @interface ViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *logonImage;
+- (IBAction)logonButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UITextField *userNameLabel;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
+
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 
 @end
 
