@@ -13,5 +13,6 @@
 @property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
 
 - (IBAction)unwindMenu:(UIStoryboardSegue *)segue;
+@property (weak, nonatomic) IBOutlet UILabel *fullNameLabel;
 
 @end

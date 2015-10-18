@@ -112,14 +112,10 @@
     NSString *postUrl = nil;
     NSString *serverRoot = PREFS_SERVER_URL;
     
-    
-    
-    
-    
-    //    UIImage *image = [info valueForKey:UIImagePickerControllerOriginalImage];
-    //   NSData *imageData = UIImageJPEGRepresentation(image, 0.5);
-    
+    NSString *authValue = [AppDataCache shared].authorization;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];
     
     if(imageBytes >0) {
         if(isNewRemedy)
@@ -227,7 +223,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // Initialize table data
-    recipes = [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
+    recipes= [NSArray arrayWithObjects:@"Egg Benedict", @"Mushroom Risotto", @"Full Breakfast", @"Hamburger", @"Ham and Egg Sandwich", @"Creme Brelee", @"White Chocolate Donut", @"Starbucks Coffee", @"Vegetable Curry", @"Instant Noodle with Egg", @"Noodle with BBQ Pork", @"Japanese Noodle with Pork", @"Green Tea", @"Thai Shrimp Cake", @"Angry Birds Cake", @"Ham and Cheese Panini", nil];
     
     problems = [NSArray arrayWithObjects:@"Area", @"Machine", @"Type of error", nil];
     contactInfos = [NSArray arrayWithObjects:@"Name", @"Email", @"Phone number", nil];
@@ -600,7 +596,7 @@
         LogItem *logItem = [logArray objectAtIndex:indexPath.row];
         dest.userId =logItem.userId;
     }
-    else if ([segue.identifier isEqualToString:@"showMenu"]) {
+    else if ([segue.identifier isEqualToString:@"showList"]) {
           NSLog(@"prepareForSegue showMenu");
     }
 }

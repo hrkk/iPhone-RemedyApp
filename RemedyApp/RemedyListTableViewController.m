@@ -48,35 +48,7 @@
     // self.clearsSelectionOnViewWillAppear = NO;
     
     // Initialize table data
-    SelectItem *area1 = [SelectItem createSelectItem:@"areaID1" text:@"area1"];
-    SelectItem *area2 = [SelectItem createSelectItem:@"areaID2" text:@"area2"];
-    SelectItem *area3 = [SelectItem createSelectItem:@"areaID3" text:@"area3"];
-    SelectItem *area5 = [SelectItem createSelectItem:@"areaID5" text:@"area5"];
-    
-    SelectItem *statusNew = [SelectItem createSelectItem:@"statusID1" text:@"New"];
-    SelectItem *statusOpen = [SelectItem createSelectItem:@"statusID2" text:@"Open"];
-    SelectItem *statusNewReassign = [SelectItem createSelectItem:@"statusID3" text:@"New (re-assign)"];
-    
-    SelectItem *statusFixed = [SelectItem createSelectItem:@"statusID4" text:@"Fixed"];
-    SelectItem *statusNotOk = [SelectItem createSelectItem:@"statusID5" text:@"Test Not Ok"];
-    SelectItem *statusNoReproduce = [SelectItem createSelectItem:@"statusID6" text:@"No reproduce"];
-    SelectItem *statusClosed = [SelectItem createSelectItem:@"statusID7" text:@"Closed"];
-
-
-    /*
-    remedyList = [NSArray arrayWithObjects:
-                  [RemedyItem createRemedyListItem:@"1" description:@"machine1 is broken" areaID:area1 status:statusNew assignedTo:@""],
-                  [RemedyItem createRemedyListItem:@"2" description:@"machine2 makes a noise and is not working" areaID:area1 status:statusNew assignedTo:@""],
-                  [RemedyItem createRemedyListItem:@"3" description:@"machine is programmed wrong" areaID:area1 status:statusOpen assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"4" description:@"Some is wrong" areaID:area2 status:statusOpen assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"5" description:@"MachineX Major failure " areaID:area2 status:statusNewReassign assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"6" description:@"No light in display" areaID:area3 status:statusOpen assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"7" description:@"No more XXX" areaID:area3 status:statusFixed assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"8" description:@"Machine3 is running slow" areaID:area3 status:statusNotOk assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"9" description:@"No more plastic in machine" areaID:area5 status:statusNoReproduce assignedTo:@"Kasper Odgaard"],
-                  [RemedyItem createRemedyListItem:@"10" description:@"Wrong size" areaID:area5 status:statusClosed assignedTo:@"Kasper Odgaard"], nil];
-     
-     */
+   
     
   
     
@@ -93,7 +65,6 @@
     NSString *serviceUrl = nil;
     NSString *serverRoot = PREFS_SERVER_URL;
    serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/remedyList/"];
-//      serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"machineRest"];
    
     
     NSURL *url = [NSURL URLWithString:serviceUrl];
@@ -110,7 +81,7 @@
         remedyList = [Utilities  loadRemedyListFromJson:responseObject];
         // Initialize the filteredCandyArray with a capacity equal to the candyArray's capacity
         self.filteredRemedyList = [NSMutableArray arrayWithCapacity:[remedyList count]];
-          [self.tableView reloadData];
+        [self.tableView reloadData];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         

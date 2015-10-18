@@ -25,6 +25,7 @@
     if (self = [super init]) {
         self.id = [NSString stringWithFormat:@"%@", [dict objectForKey:@"id"]];
         self.description = [dict objectForKey:@"description"];
+        self.assignedTo = [dict objectForKey:@"assignedTo"];
         // get status
         NSDictionary *statusDict =[dict objectForKey:@"status"];
         NSDictionary *areaDict =[dict objectForKey:@"area"];
