@@ -14,4 +14,7 @@
 @property NSString *email;
 @property NSString *phoneNumber;
 
+// Constructor
+- (id) initWithDictionary:(NSDictionary *) dict;
+
 @end

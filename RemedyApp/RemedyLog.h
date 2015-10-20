@@ -10,6 +10,7 @@
 
 @interface RemedyLog : NSObject
 
+@property NSString *userId;
 @property NSString *lastUpdated;
 @property NSString *status;
 @property NSString *statusChangeByName;

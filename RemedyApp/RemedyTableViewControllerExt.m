@@ -27,7 +27,6 @@
     NSArray *contactInfos;
     NSArray *logs;
     
-    NSMutableArray *logArray;
     BOOL isNewRemedy;
 }
 
@@ -228,23 +227,6 @@
     problems = [NSArray arrayWithObjects:@"Area", @"Machine", @"Type of error", nil];
     contactInfos = [NSArray arrayWithObjects:@"Name", @"Email", @"Phone number", nil];
     logs = [NSArray arrayWithObjects:@"Created", @"Assign to XXX", @"Reassignment", nil];
-    
-    
-    logArray = [[NSMutableArray alloc] init];
-    // add some data to the array
-    LogItem *logItem1 = [[LogItem alloc] init];
-    logItem1.username = @"Jens Jensen";
-    logItem1.status = @"Created";
-    logItem1.displayDateTime =@"5h";
-    
-    [logArray addObject:logItem1];
-    
-    LogItem *logItem2 = [[LogItem alloc] init];
-    logItem2.username = @"Jørgen Jørgensen";
-    logItem2.status = @"Assigned";
-    logItem2.displayDateTime =@"1d";
-    
-    [logArray addObject:logItem2];
     
     // create empty remedyItem
     if(remedyItem==nil) {
@@ -593,7 +575,12 @@
         UINavigationController *navigationController = segue.destinationViewController;
         ContactInfoViewController *dest = (ContactInfoViewController * )navigationController;
         NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        LogItem *logItem = [logArray objectAtIndex:indexPath.row];
+        
+        //     RemedyLog *logItem = [remedyItem.logs objectAtIndex:indexPath.row];
+        
+        
+        
+        RemedyLog *logItem = [remedyItem.logs objectAtIndex:indexPath.row];
         dest.userId =logItem.userId;
     }
     else if ([segue.identifier isEqualToString:@"showList"]) {

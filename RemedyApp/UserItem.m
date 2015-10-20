@@ -13,4 +13,14 @@
 @synthesize username;
 @synthesize email;
 @synthesize phoneNumber;
+
+- (id) initWithDictionary:(NSDictionary *) dict{
+    if (self = [super init]) {
+        self.username =[dict objectForKey:@"fullName"];
+        self.email = [dict objectForKey:@"email"];
+        self.phoneNumber =[dict objectForKey:@"phoneNumber"];
+
+    }
+    return self;
+}
 @end
