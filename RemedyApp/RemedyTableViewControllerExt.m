@@ -120,7 +120,7 @@
         if(isNewRemedy)
             postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/save"];
         else
-            postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/update"];
+            postUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/updateImage"];
         [manager POST:postUrl parameters:jsonDict constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
             [formData appendPartWithFileData:imageData name:@"photo" fileName:@"head.jpg" mimeType:@"jpg"];
         } success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -248,7 +248,7 @@
         self.navigationItem.title =  title;
         NSString *serviceUrl = nil;
         NSString *serverRoot = PREFS_SERVER_URL;
-        serviceUrl = [NSString stringWithFormat:@"%@%@%@", serverRoot, @"remedy/showImage/", remedyItem.id];
+        serviceUrl = [NSString stringWithFormat:@"%@%@%@", serverRoot, @"imageRest/showImage/", remedyItem.id];
         NSURL *url = [NSURL URLWithString:serviceUrl];
         NSData *data = [NSData dataWithContentsOfURL:url];
         remedyItem.image = [UIImage imageWithData:data];

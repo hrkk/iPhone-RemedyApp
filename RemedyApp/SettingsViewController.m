@@ -7,6 +7,11 @@
 //
 
 #import "SettingsViewController.h"
+#import "AFNetworking.h"
+#import "Prefs.h"
+#import "AppDataCache.h"
+#import "Utilities.h"
+#import "SelectItem.h"
 
 @interface SettingsViewController ()
 
@@ -20,27 +25,94 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-        int y = 250;
-    int count = 1;
-    for (int i=0; i<=5; i++) {
-        UISwitch *button = [[UISwitch alloc] initWithFrame:  CGRectMake(100, y, 160, 40)];
-        [button addTarget:self
-                   action:@selector(aMethod:)
-         forControlEvents:UIControlEventValueChanged];
     
-        
-        [self.subView addSubview:button];
-        
-          UILabel *label = [[UILabel alloc] initWithFrame:  CGRectMake(10, y, 160, 40)];
-        
-        NSString *textLabel = [NSString stringWithFormat:@"Area %d", count];
-        label.text =textLabel;
-        count++;
-        [self.subView addSubview:label];
+    // Setting Up Activity Indicator View
+    self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    self.activityIndicatorView.hidesWhenStopped = YES;
+    self.activityIndicatorView.center = self.view.center;
+    [self.view addSubview:self.activityIndicatorView];
+    [self.activityIndicatorView startAnimating];
+    
+    NSString *serviceUrl = nil;
+    NSString *serverRoot = PREFS_SERVER_URL;
+    NSString *authValue = [AppDataCache shared].authorization;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];
+    
+    //    areaControllerRest
+    serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"userRest/profile"];
+    [manager GET:serviceUrl
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             [self.activityIndicatorView stopAnimating];
+             NSLog(@"JSON: %@", responseObject);
+             
+             // lets greb areas
+             NSDictionary *areasDict =[responseObject objectForKey:@"areas"];
+             
+            
 
-        y=y+40;
-    }
+            
+           
+       //    NSArray *seletecdAreaList  = [Utilities loadSelectedAreasFromJson:responseObject];
+           //  NSLog(@"%@",[AppDataCache shared].areaList);
+             
+           NSArray *areaList =[AppDataCache shared].areaList;
+             
+             
+             int y = 250;
+             int count = 1;
+             
+             for (int i=0; i< [areaList count]; i++){
+                           
+                                 // SelectItem *item = [object];
+             //      NSLog(@"[%d]:%@",i,arrData[i]);
+                 SelectItem *item = [areaList objectAtIndex:i];
+
+                     NSLog(@"object: %@", item.text);
+                 UISwitch *button = [[UISwitch alloc] initWithFrame:  CGRectMake(100, y, 160, 40)];
+                 [button addTarget:self
+                            action:@selector(aMethod:)
+                  forControlEvents:UIControlEventValueChanged];
+                 
+                 // checker om den er sat eller ej
+                 for(NSDictionary *dict in areasDict) {
+                     NSString *id = [NSString stringWithFormat:@"%@", [dict objectForKey:@"id"]];
+                     NSLog(@"area id: %@",  id);
+                     if ([item.id isEqualToString:id]) {
+                          button.on = TRUE;
+                    }
+                 }
+                 
+                 
+                 [self.subView addSubview:button];
+                 
+                 UILabel *label = [[UILabel alloc] initWithFrame:  CGRectMake(10, y, 160, 40)];
+                 
+                 NSString *textLabel = [NSString stringWithFormat:@"%@", item.text];
+                 label.text =textLabel;
+                 count++;
+                 [self.subView addSubview:label];
+                 
+                 y=y+40;
+             }
+
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error);
+             [self.activityIndicatorView stopAnimating];
+             NSString *errMsg = [NSString stringWithFormat:@"Error Retrieving Server data %@", serviceUrl];
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:errMsg
+                                                                 message:[error localizedDescription]
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"Ok"
+                                                       otherButtonTitles:nil];
+             [alertView show];
+         }];
+
+    
+    
     
 }
 

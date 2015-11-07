@@ -14,6 +14,8 @@
     @property NSArray * remedyList;
     @property IBOutlet UISearchBar *remedySearchBar;
 
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
+
 - (IBAction)unwindToRemedyList:(UIStoryboardSegue *)segue;
 
 @end

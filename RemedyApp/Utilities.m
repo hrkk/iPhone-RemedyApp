@@ -30,7 +30,27 @@
     }
     
      return array;
+}
+
+/*
++(NSMutableArray*) loadSelectedAreasFromJson:(NSArray*)profile {
+      NSMutableArray *array = [[NSMutableArray alloc] init];
+    // greb areas
+    NSDictionary *dict = profile;
+     for(NSDictionary *JSONRemedy in allRemedys) {
+     }
+
+      NSDictionary *areasDict =[dict objectForKey:@"areas"];
+
+    for(NSDictionary *area in areasDict) {
+          [area objectForKey:@"id"];
+
+          
+      }
+
+    
     
 }
+ */
 
 @end

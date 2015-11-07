@@ -12,6 +12,7 @@
 #import "AFNetworking.h"
 #import "Prefs.h"
 #import "Utilities.h"
+#import "AppDataCache.h"
 
 @interface RemedyListTableViewController ()
 
@@ -53,49 +54,45 @@
   
     
     // Setting Up Activity Indicator View
-    /*
+    
     self.activityIndicatorView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     self.activityIndicatorView.hidesWhenStopped = YES;
     self.activityIndicatorView.center = self.view.center;
     [self.view addSubview:self.activityIndicatorView];
     [self.activityIndicatorView startAnimating];
-    */
     
-    // 1
+    
     NSString *serviceUrl = nil;
     NSString *serverRoot = PREFS_SERVER_URL;
-   serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/remedyList/"];
-   
+    NSString *authValue = [AppDataCache shared].authorization;
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = [AFJSONRequestSerializer serializer];
+    [manager.requestSerializer setValue:authValue forHTTPHeaderField:@"Authorization"];
     
-    NSURL *url = [NSURL URLWithString:serviceUrl];
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    // 2
-    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
-    operation.responseSerializer = [AFJSONResponseSerializer serializer];
-    
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        
-        // 3
-        NSLog(@"JSON: %@", responseObject);
-        remedyList = [Utilities  loadRemedyListFromJson:responseObject];
-        // Initialize the filteredCandyArray with a capacity equal to the candyArray's capacity
-        self.filteredRemedyList = [NSMutableArray arrayWithCapacity:[remedyList count]];
-        [self.tableView reloadData];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        
-        // 4
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error Retrieving Area's"
-                                                            message:[error localizedDescription]
-                                                           delegate:nil
-                                                  cancelButtonTitle:@"Ok"
-                                                  otherButtonTitles:nil];
-        [alertView show];
-    }];
-    
-    // 5
-    [operation start];
+    //    areaControllerRest
+    serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"remedyRest/remedyList/"];
+    [manager GET:serviceUrl
+      parameters:nil
+         success:^(AFHTTPRequestOperation *operation, id responseObject) {
+             [self.activityIndicatorView stopAnimating];
+             NSLog(@"JSON: %@", responseObject);
+             remedyList = [Utilities  loadRemedyListFromJson:responseObject];
+             // Initialize the filteredCandyArray with a capacity equal to the candyArray's capacity
+             self.filteredRemedyList = [NSMutableArray arrayWithCapacity:[remedyList count]];
+             [self.tableView reloadData];
+
+             
+         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+             NSLog(@"Error: %@", error);
+             [self.activityIndicatorView stopAnimating];
+             NSString *errMsg = [NSString stringWithFormat:@"Error Retrieving Server data %@", serviceUrl];
+             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:errMsg
+                                                                 message:[error localizedDescription]
+                                                                delegate:nil
+                                                       cancelButtonTitle:@"Ok"
+                                                       otherButtonTitles:nil];
+             [alertView show];
+         }];
 }
 
 - (void)didReceiveMemoryWarning {

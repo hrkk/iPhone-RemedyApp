@@ -14,4 +14,6 @@
 
 +(NSMutableArray*) loadRemedyListFromJson:(NSArray*)allRemedys;
 
+//+(NSMutableArray*) loadSelectedAreasFromJson:(NSArray*)profile;
+
 @end

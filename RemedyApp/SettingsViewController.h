@@ -10,4 +10,7 @@
 
 @interface SettingsViewController : UIViewController
 
+
+@property (nonatomic, retain) UIActivityIndicatorView *activityIndicatorView;
+
 @end

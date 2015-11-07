@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A7269E801BC064E2000D31DD /* RemedyLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A7269E7F1BC064E2000D31DD /* RemedyLog.m */; settings = {ASSET_TAGS = (); }; };
+		A7269E801BC064E2000D31DD /* RemedyLog.m in Sources */ = {isa = PBXBuildFile; fileRef = A7269E7F1BC064E2000D31DD /* RemedyLog.m */; };
 		A73C52A51B27761E004A27E6 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52A41B27761E004A27E6 /* ComposeViewController.m */; };
 		A73C52AB1B28329F004A27E6 /* RemedyTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52AA1B28329F004A27E6 /* RemedyTableViewController.m */; };
 		A73C52AE1B28D5A0004A27E6 /* RemedyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = A73C52AD1B28D5A0004A27E6 /* RemedyItem.m */; };
@@ -53,7 +53,7 @@
 		A7CF22651B150009007EF1E7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = A7CF22631B150009007EF1E7 /* LaunchScreen.xib */; };
 		A7CF22711B150009007EF1E7 /* RemedyAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = A7CF22701B150009007EF1E7 /* RemedyAppTests.m */; };
 		A7CF227B1B150396007EF1E7 /* creme_brelee.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A7CF227A1B150396007EF1E7 /* creme_brelee.jpg */; };
-		A7E43FDD1BC440CF00539F79 /* AppDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E43FDC1BC440CF00539F79 /* AppDataCache.m */; settings = {ASSET_TAGS = (); }; };
+		A7E43FDD1BC440CF00539F79 /* AppDataCache.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E43FDC1BC440CF00539F79 /* AppDataCache.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
