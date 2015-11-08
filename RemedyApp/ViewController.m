@@ -53,7 +53,7 @@
     
     NSString *serviceUrl = nil;
     NSString *serverRoot = PREFS_SERVER_URL;
-    serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"userRest/validate.json"];
+    serviceUrl = [NSString stringWithFormat:@"%@%@", serverRoot, @"userRest/validate"];
     
     NSString *authValue = [NSString stringWithFormat:@"Basic %@", base64String];
    
